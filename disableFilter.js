@@ -1,14 +1,46 @@
-window.onload = output();
-let output = function () {
+
+window.onload = function () {
     alert("Page loaded");
 }
 
-// window.onload = function () {
-//     alert("Page loaded");
-// }
+document.getElementById('disableFilter').addEventListener("click",hideFilter);
 
-function hideFilter(){
+//document.getElementsByClassName("search-form").addEventListener("submit",log);
+
+
+
+document.getElementById("searchfield").addEventListener("input",checkfilter);
+
+function checkfilter (){
+    let selectedValues = [];
+    const selects = document.querySelectorAll('select');
+    selects.forEach(select => {
+        Array.from(select.options).forEach(option => {
+            if (option.selected) {
+                selectedValues.push(option.value);
+            }
+        });
+    });
+    //console.log(selectedValues);
+
+    const isFilterSelected = containsAlphaNumeric(selectedValues);
+    if(!isFilterSelected){
+        alert("Bitte einen Filter auswählen!")
+    }
+    //console.log(isFilterSelected);
+
+    function containsAlphaNumeric(arr) {
+        const alphaNumericRegex = /^[a-zA-Z0-9]+$/;
     
+        return arr.some(item => alphaNumericRegex.test(item));
+    }   
+   
+    // const array = [, '%!', '123', , '!', '456'];
+    // const result = containsAlphaNumeric(array);
+    // console.log(result);    
+}
+
+function hideFilter(){    
     
     if(document.getElementById('disableFilter').innerHTML == "Filter ausblenden"){
         document.getElementById('disableFilter').innerHTML = "Filter anzeigen";
@@ -23,36 +55,23 @@ function hideFilter(){
         document.getElementById('output').style.display = "none";
     }
      
-}
-
-document.getElementById('disableFilter').addEventListener(onclick,hideFilter());
-
-
-
-      
+}    
    
     function getValues() {
-        // Ein Array für die ausgewählten Werte
+        
         let selectedValues = [];
-
-        // Alle Select-Elemente im Formular abrufen
+        
         const selects = document.querySelectorAll('select');
-
-        // Durch die Select-Elemente iterieren
-        selects.forEach(select => {
-            // Durch alle Optionen des Select-Elements iterieren
-            Array.from(select.options).forEach(option => {
-                // Nur ausgewählte Optionen hinzufügen
+       
+        selects.forEach(select => {            
+            Array.from(select.options).forEach(option => {                
                 if (option.selected) {
                     selectedValues.push(option.value);
                 }
             });
-        });
-
-        // Das Array mit den Werten in der Konsole ausgeben
+        });        
         console.log(selectedValues);
-
-        // Optional: die Werte auch im HTML ausgeben
+        
         document.getElementById('output').innerText = selectedValues.length > 0
             ? 'Kategorie: ' + selectedValues[0] + '\nJahr: ' + selectedValues[1] + '\nBewertung: ' + selectedValues[2]+ '\nStreamdienst: '+selectedValues[3]
             : 'Keine Werte ausgewählt.';

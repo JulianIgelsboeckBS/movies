@@ -51,9 +51,9 @@
 						</ul> <!-- .menu -->
 
 						<form action="#" class="search-form">
-							<input type="text" placeholder="Search...">
+							<input type="text" placeholder="Search..." id="searchfield" value="">
 							<button><i class="fa fa-search"></i></button>
-							<button  class="btn" id="disableFilter" onclick="hideFilter()">Filter ausblenden</button>
+							<button  class="btn" id="disableFilter" >Filter ausblenden</button>
 						</form>
 					</div> <!-- .main-navigation -->
 
@@ -74,22 +74,26 @@
 								<div  class="filters" id="filters">
 									<form class="form">
 										<select id="select" >
+											<option value="" selected></option>
 											<option value="Action" >Action</option>
 											<option value="Drama">Drama</option>
 											<option value="Fantasy">Fantasy</option>
 											
 										</select>
 										<select id="select" placeholder="Year" >
+											<option value="" selected></option>
 											<option value="2012" >2012</option >
 											<option value="2013">2013</option>
 											<option value="2014">2014</option>
 										</select>
 										<select id="select" placeholder="Bewertung" >
+											<option value="" selected></option>
 											<option value="Top" >Top</option >
 											<option value="Sehr Gut">Sehr Gut</option>
 											<option value="Gut">Gut</option>
 										</select>
 										<select id="select" placeholder="Streaming-Dienst" >
+											<option value="" selected></option>
 											<option value="Netflix" >Netflix</option>
 											<option value="Amazon">Amazon Prime</option>
 											<option value="Sky">Sky</option>
