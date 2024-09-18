@@ -1,13 +1,11 @@
 
 window.onload = function () {
     alert("Page loaded");
-}
+
 
 document.getElementById('disableFilter').addEventListener("click",hideFilter);
 
 //document.getElementsByClassName("search-form").addEventListener("submit",log);
-
-
 
 document.getElementById("searchfield").addEventListener("input",checkfilter);
 
@@ -35,9 +33,7 @@ function checkfilter (){
         return arr.some(item => alphaNumericRegex.test(item));
     }   
    
-    // const array = [, '%!', '123', , '!', '456'];
-    // const result = containsAlphaNumeric(array);
-    // console.log(result);    
+    
 }
 
 function hideFilter(){    
@@ -77,6 +73,23 @@ function hideFilter(){
             : 'Keine Werte ausgewählt.';
     }
 
+    document.getElementById("searchfield").addEventListener("input",searchfilter);
 
+    function searchfilter(){
+        var movielist = document.getElementsByClassName("movie");
+    var searchtext = document.getElementById("searchfield").value.toUpperCase();
+    for(let movie of movielist){
+        var movietag = movie.getElementsByTagName("a")[0].innerHTML.toUpperCase();
+        if(movietag.includes(searchtext)){
+            movie.style.display = "block";
+        }
+        else{
+            movie.style.display = "none";
+        }
+    }
 
+    }
+    
+    
+}
 
