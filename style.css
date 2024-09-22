@@ -1578,7 +1578,7 @@ ul.arrow {
   font-weight: 300; }
 
 .filters {
-  margin-bottom: 50px; }
+  margin-bottom: 10px; }
   .filters select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -1588,6 +1588,7 @@ ul.arrow {
     border-radius: 5px;
     border: none;
     margin-right: 10px;
+    margin-block: 5px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
     outline: none;
     background-image: url(images/select.png);

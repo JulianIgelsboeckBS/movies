@@ -1,6 +1,6 @@
 
 window.onload = function () {
-    alert("Page loaded");
+    
 
 
 document.getElementById('disableFilter').addEventListener("click",hideFilter);
@@ -38,15 +38,15 @@ function checkfilter (){
 
 function hideFilter(){    
     
-    if(document.getElementById('disableFilter').innerHTML == "Filter ausblenden"){
-        document.getElementById('disableFilter').innerHTML = "Filter anzeigen";
+    if(document.getElementById('disableFilter').innerText == "Filter ausblenden"){
+        document.getElementById('disableFilter').innerText = "Filter anzeigen";
         document.getElementById('filters').style.display = "none";
         getValues();
         document.getElementById('output').style.display = "block";
        
     }
     else{
-        document.getElementById('disableFilter').innerHTML = "Filter ausblenden";
+        document.getElementById('disableFilter').innerText = "Filter ausblenden";
         document.getElementById('filters').style.display = "block";
         document.getElementById('output').style.display = "none";
     }
