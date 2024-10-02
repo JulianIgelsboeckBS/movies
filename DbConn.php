@@ -2,8 +2,8 @@
 
 class DbConn
 {
-
-    static function connect()
+    
+     function connect()
     {
 
         $host = "localhost";

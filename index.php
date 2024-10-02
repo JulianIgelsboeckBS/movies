@@ -28,7 +28,7 @@
 
 
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <div class="slider">
                                     <ul class="slides">
                                         <li><a href="#"><img src="dummy/slide-1.jpg" alt="Slide 1"></a></li>
@@ -37,7 +37,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-12">
                                         <div class="latest-movie">
@@ -50,13 +50,37 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div> <!-- .row -->
 
 
 
 
                         <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                                <div class="card mb-4 shadow-sm">
+                                    <a href="#">
+                                        <img src="dummy/thumb-1.jpg" class="card-img-top" alt="Movie 1">
+                                    </a>
+                                    <div class="card-body p-3">
+                                        <p class="card-text"><strong>Filmtitel: </strong>Movie 1</p>
+                                        <p class="card-text"><strong>Genre: </strong>Action</p>
+                                        <p class="card-text"><strong>Erscheinungsjahr: </strong>2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-3">
+                                <div class="card mb-4 shadow-sm">
+                                    <a href="#">
+                                        <img src="dummy/thumb-2.jpg" class="card-img-top" alt="Movie 2">
+                                    </a>
+                                    <div class="card-body p-3">
+                                        <p class="card-text"><strong>Filmtitel: </strong>Movie 2</p>
+                                        <p class="card-text"><strong>Genre: </strong>Action</p>
+                                        <p class="card-text"><strong>Erscheinungsjahr: </strong>2023</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-sm-6 col-md-3">
                                 <div class="card mb-4 shadow-sm">
                                     <a href="#">
@@ -73,10 +97,10 @@
                                 <div class="col-sm-6 col-md-3">
                                     <div class="card mb-4 shadow-sm">
                                         <a href="#">
-                                            <img src="dummy/thumb-3.jpg" class="card-img-top" alt="Movie 3">
+                                            <img src="dummy/thumb-4.jpg" class="card-img-top" alt="Movie 4">
                                         </a>
                                         <div class="card-body p-3">
-                                            <p class="card-text"><strong>Filmtitel: </strong>Movie 3</p>
+                                            <p class="card-text"><strong>Filmtitel: </strong>Movie 4</p>
                                             <p class="card-text"><strong>Genre: </strong>Action</p>
                                             <p class="card-text"><strong>Erscheinungsjahr: </strong>2023</p>
                                         </div>
@@ -86,10 +110,10 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="card mb-4 shadow-sm">
                                             <a href="#">
-                                                <img src="dummy/thumb-3.jpg" class="card-img-top" alt="Movie 3">
+                                                <img src="dummy/thumb-5.jpg" class="card-img-top" alt="Movie 5">
                                             </a>
                                             <div class="card-body p-3">
-                                                <p class="card-text"><strong>Filmtitel: </strong>Movie 3</p>
+                                                <p class="card-text"><strong>Filmtitel: </strong>Movie 5</p>
                                                 <p class="card-text"><strong>Genre: </strong>Action</p>
                                                 <p class="card-text"><strong>Erscheinungsjahr: </strong>2023</p>
                                             </div>
@@ -99,10 +123,10 @@
                                         <div class="col-sm-6 col-md-3">
                                             <div class="card mb-4 shadow-sm">
                                                 <a href="#">
-                                                    <img src="dummy/thumb-3.jpg" class="card-img-top" alt="Movie 3">
+                                                    <img src="dummy/thumb-6.jpg" class="card-img-top" alt="Movie 6">
                                                 </a>
                                                 <div class="card-body p-3">
-                                                    <p class="card-text"><strong>Filmtitel: </strong>Movie 3</p>
+                                                    <p class="card-text"><strong>Filmtitel: </strong>Movie 6</p>
                                                     <p class="card-text"><strong>Genre: </strong>Action</p>
                                                     <p class="card-text"><strong>Erscheinungsjahr: </strong>2023</p>
                                                 </div>

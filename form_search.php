@@ -1,15 +1,18 @@
 <?php
-require_once("DbConn.php");
+//require_once("DbConn.php");
+require_once("filterQueries.php");
+$db = new DbConn();
+$pdo = $db->connect();
 
-$pdo = DbConn::connect();
+$filter = new filterQueries();
 
-
-$genreQuery = "SELECT DISTINCT g.name AS genre FROM genres g JOIN offersHasGenres og ON g.id = og.genres_id";
+$genres = $filter->getGenre();
+//$genreQuery = "SELECT DISTINCT g.name AS genre FROM genres g JOIN offersHasGenres og ON g.id = og.genres_id";
 $releaseYearQuery = "SELECT DISTINCT m.releaseYear FROM movie m";
 $ratingQuery = "SELECT DISTINCT o.rating FROM offers o";
 $providerQuery = "SELECT DISTINCT p.name AS provider FROM providers p JOIN offersHasProviders op ON p.id = op.provider_id";
 
-$genres = $pdo->query($genreQuery)->fetchAll(PDO::FETCH_ASSOC);
+//$genres = $pdo->query($genreQuery)->fetchAll(PDO::FETCH_ASSOC);
 $releaseYears = $pdo->query($releaseYearQuery)->fetchAll(PDO::FETCH_ASSOC);
 $ratings = $pdo->query($ratingQuery)->fetchAll(PDO::FETCH_ASSOC);
 $providers = $pdo->query($providerQuery)->fetchAll(PDO::FETCH_ASSOC);
@@ -123,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary mt-4">Search</button>
+    <button type="submit" class="btn btn-warning mt-4">Search</button>
 </form>
 
 <!-- Display Search Results with Bootstrap Styling -->

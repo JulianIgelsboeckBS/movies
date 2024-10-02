@@ -1,13 +1,13 @@
 <html>
 <body>
 <?php
-require_once "DbConn.php";
-$db = new dbConn();
-$a = $db->SelectFilters();
-foreach ($a as $row) {
-    echo $row['rating']."<br>";
-};
+require_once("filterQueries.php");
 
+$filter = new filterQueries();
+$a = $filter->getGenre();
+foreach ($a as $row) {
+    echo $row['genre']."<br>";
+};
 ?>
 
 

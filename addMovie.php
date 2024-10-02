@@ -21,7 +21,7 @@
 				<div class="page">
 					<div class="breadcrumbs">
 						<a href="index.html">Home</a>
-						<span>Join Us</span>
+						<span>Film anlegen</span>
 					</div>
 
 
@@ -84,7 +84,7 @@
 								placeholder="z.B. Netflix, Amazon Prime" required></textarea>
 						</div>
 
-						<button type="submit" class="btn btn-primary">Film anlegen</button>
+						<button type="submit" class="btn btn-warning">Film anlegen</button>
 					</form>
 					<!-- </div> -->
 

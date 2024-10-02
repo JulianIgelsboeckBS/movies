@@ -21,7 +21,7 @@
             <div class="page">
                 <div class="breadcrumbs">
                     <a href="index.html">Home</a>
-                    <span>Join Us</span>
+                    <span>Filmsuche</span>
                 </div>
 
                 <?php include __DIR__ . '/form_search.php'; ?>
