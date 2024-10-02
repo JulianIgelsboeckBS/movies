@@ -1,11 +1,11 @@
 <html>
 <body>
 <?php
-require_once "offers.php";
-$db = new offers();
-$a = $db->offerQuery();
+require_once "DbConn.php";
+$db = new dbConn();
+$a = $db->SelectFilters();
 foreach ($a as $row) {
-    echo $row['title']."<br>";
+    echo $row['rating']."<br>";
 };
 
 ?>
