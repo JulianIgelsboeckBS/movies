@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     $selectedProvider = $_POST['provider'];
 
     $searchQuery = "
-        SELECT o.title, o.description, o.rating, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers, g.name AS genre
+        SELECT o.id, o.title, o.description, o.rating, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers, g.name AS genre
         FROM offers o
         JOIN movie m ON o.id = m.offers_id
         JOIN offersHasGenres og ON o.id = og.offers_id
@@ -141,7 +141,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                     <div class="col-md-4">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title"><?= $result['title'] ?></h5>
+                                <h5 class="card-title">
+                                    <a href="movie_details.php?id=<?= $result['id'] ?>">
+                                        <?= $result['title'] ?>
+                                    </a>
+                                </h5>
                                 <p class="card-text">
                                     <strong>Description:</strong> <?= $result['description'] ?><br>
                                     <strong>Genre:</strong> <?= $result['genre'] ?><br>
@@ -157,3 +161,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         <?php endif; ?>
     </div>
 <?php endif; ?>
+
