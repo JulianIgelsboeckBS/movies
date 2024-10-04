@@ -1,13 +1,11 @@
 <html>
 <body>
 <?php
-require_once("filterQueries.php");
+require_once("movie.php");
 
-$filter = new filterQueries();
-$a = $filter->getGenre();
-foreach ($a as $row) {
-    echo $row['genre']."<br>";
-};
+$movie = new movie(2);
+echo $movie->title;
+//print_r($movies);
 ?>
 
 
@@ -21,4 +19,3 @@ foreach ($a as $row) {
 
 
 
-?>

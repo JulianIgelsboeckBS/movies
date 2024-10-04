@@ -5,8 +5,8 @@ $db = new DbConn();
 $pdo = $db->connect();
 
 $filter = new filterQueries();
-
 $genres = $filter->getGenre();
+
 //$genreQuery = "SELECT DISTINCT g.name AS genre FROM genres g JOIN offersHasGenres og ON g.id = og.genres_id";
 $releaseYearQuery = "SELECT DISTINCT m.releaseYear FROM movie m";
 $ratingQuery = "SELECT DISTINCT o.rating FROM offers o";
@@ -138,9 +138,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         <?php else: ?>
             <div class="row">
                 <?php foreach ($results as $result): ?>
-                    <div class="col-md-4">
-                        <div class="card mb-3">
-                            <div class="card-body">
+                    <div class="col-sm-6 col-md-3">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="dummy/thumb-1.jpg" class="card-img-top" alt="Movie 1">
+                            <div class="card-body p-3">
                                 <h5 class="card-title">
                                     <a href="movie_details.php?id=<?= $result['id'] ?>">
                                         <?= $result['title'] ?>
