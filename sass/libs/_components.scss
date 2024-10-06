@@ -28,9 +28,16 @@
 		border-radius: 5px;
 		overflow: hidden;
 	}
+	.slider img {
+		width: 100%; /* This makes the image take up the full width of the container */
+		height: 400px; /* Set a fixed height for the images */
+		object-fit: cover; /* Ensures the image covers the area while maintaining aspect ratio */
+		display: block;
+	}
+
 	img{
-		max-width: 100%;
-		width: 100%;
+		//max-width: auto;
+		width: auto;
 		height: auto;
 		display: block;
 	}

@@ -1,11 +1,11 @@
 <header class="site-header">
     <div class="container">
         <a href="index.php" id="branding">
-            <img src="images/logo.png" alt="" class="logo">
-            <div class="logo-copy">
-                <h1 class="site-title">Company Name</h1>
-                <small class="site-description">Tagline goes here</small>
-            </div>
+            <img src="images/streamer1.png" alt="" class="logo">
+            <!--<div class="logo-copy">
+                <h1 class="site-title">Streamer</h1>
+                <small class="site-description">Follow your Streams</small>
+            </div> -->
         </a> <!-- #branding -->
         <nav>
             <div class="main-navigation">

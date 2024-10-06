@@ -211,8 +211,8 @@ table {
  * Global Styles
  */
 body {
-  background-color: #131a20;
-  background-image: url(dummy/background.jpg);
+  background-color: black;
+  //background-image: url(dummy/background.jpg);
   background-position: top center;
   background-repeat: no-repeat;
   color: #84878d;

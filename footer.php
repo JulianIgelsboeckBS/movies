@@ -19,28 +19,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="widget">
-                    <h3 class="widget-title">Help Center</h3>
-                    <ul class="no-bullet">
-                        <li>Lorem ipsum dolor</li>
-                        <li>Sit amet consecture</li>
-                        <li>Dolorem respequem</li>
-                        <li>Invenore veritae</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="widget">
-                    <h3 class="widget-title">Join Us</h3>
-                    <ul class="no-bullet">
-                        <li>Lorem ipsum dolor</li>
-                        <li>Sit amet consecture</li>
-                        <li>Dolorem respequem</li>
-                        <li>Invenore veritae</li>
-                    </ul>
-                </div>
-            </div>
+
             <div class="col-md-2">
                 <div class="widget">
                     <h3 class="widget-title">Social Media</h3>
@@ -62,7 +41,7 @@
             </div>
         </div> <!-- .row -->
 
-        <div class="colophon">Copyright 2014 Company name, Designed by Themezy. All rights reserved</div>
+        <div class="colophon">Copyright 2024 Streamer, Designed by Me. All rights reserved</div>
     </div> <!-- .container -->
 
 </footer>
