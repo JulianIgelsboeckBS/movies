@@ -53,7 +53,9 @@
                                 <td>
                                     <!-- Update and Delete buttons with the movie ID passed as query params -->
                                     <a href="updateMovie.php?id=<?= $movie['id'] ?>" class="btn btn-primary btn-sm">Update</a>
-                                    <a  class="btn btn-danger btn-sm" href="<?= $instance->deleteMovies($movie['id']) ?>" >Delete</a>
+                                    <button class="btn btn-danger btn-sm mt-2" onclick="confirmDelete(<?= $movie['id'] ?>)">Delete</button>
+
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -73,7 +75,13 @@
 <!-- Default snippet for navigation -->
 
 
-
+<script>
+    function confirmDelete(movieId) {
+        if (confirm("Are you sure you want to delete this movie?")) {
+            window.location.href = 'deleteMovie.php?id=' + movieId;
+        }
+    }
+</script>
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/app.js"></script>
