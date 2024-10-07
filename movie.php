@@ -111,7 +111,80 @@ class Movie extends DbConn
 
         return $stmt->execute();
     }
-public function deleteMovie($id){
+    public function deleteMovie($sid): bool
+    {
+        $pdo = $this->connect();
+
+        try {
+            // Start a transaction
+            $pdo->beginTransaction();
+
+            // Execute each delete statement separately
+            $sql1 = "DELETE FROM offersHasGenres WHERE offers_id = :id";
+            $sql2 = "DELETE FROM offersHasProviders WHERE offers_id = :id";
+            $sql3 = "DELETE FROM actors WHERE movies_id = :id";
+            $sql4 = "DELETE FROM directors WHERE movies_id = :id";
+            $sql5 = "DELETE FROM hasDubs WHERE offers_id = :id";
+            $sql6 = "DELETE FROM hasSubs WHERE offers_id = :id";
+            $sql7 = "DELETE FROM movie WHERE offers_id = :id";
+            $sql8 = "DELETE FROM watchlists WHERE offers_id = :id";
+            $sql9 = "DELETE FROM seasons WHERE offers_id = :id";
+            $sql10 = "DELETE FROM offers WHERE id = :id";
+
+            $stmt = $pdo->prepare($sql1);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql2);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql3);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql4);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql5);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql6);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql7);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql8);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql9);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            $stmt = $pdo->prepare($sql10);
+            $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Commit the transaction
+            $pdo->commit();
+
+            return true;
+
+        } catch (PDOException $e) {
+            // Rollback the transaction on error
+            $pdo->rollBack();
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function deleteMoviee($id){
     $pdo = $this->connect();
     $sqlDeleteProviders = "DELETE FROM offershasgenres WHERE offers_id = :id";
     $stmtDeleteProviders = $pdo->prepare($sqlDeleteProviders);
@@ -134,7 +207,7 @@ DELETE FROM hassubs WHERE offers_id = :id;
 DELETE FROM movie WHERE offers_id = :id;
 DELETE FROM watchlists WHERE offers_id = :id;
 DELETE FROM seasons WHERE offers_id = :id;
-DELETE FROM offers WHERE id = :id";
+DELETE FROM offers WHERE id = :id;";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
