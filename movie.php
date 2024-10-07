@@ -111,17 +111,33 @@ class Movie extends DbConn
 
         return $stmt->execute();
     }
+public function deleteMovie($id){
+    $pdo = $this->connect();
+    $sqlDeleteProviders = "DELETE FROM offershasgenres WHERE offers_id = :id";
+    $stmtDeleteProviders = $pdo->prepare($sqlDeleteProviders);
+    $stmtDeleteProviders->execute([':id' => $id]);
 
+    $sqlDeleteProviders = "DELETE FROM offersHasProviders WHERE offers_id = :id";
+    $stmtDeleteProviders = $pdo->prepare($sqlDeleteProviders);
+    $stmtDeleteProviders->execute([':id' => $id]);
+}
     // Delete a movie by ID
-    public function deleteMovie($id)
+    public  function  deleteMovies($sid):bool
     {
         $pdo = $this->connect();
-        $sql = "DELETE o, m FROM offers o 
-                JOIN movie m ON o.id = m.offers_id 
-                WHERE o.id = :id";
+        $sql = "DELETE FROM offershasgenres WHERE offers_id = :id;
+DELETE FROM offersHasProviders WHERE offers_id = :id;
+DELETE FROM actors WHERE movies_id = :id;
+DELETE FROM directors WHERE movies_id = :id;
+DELETE FROM hasdubs WHERE offers_id = :id;
+DELETE FROM hassubs WHERE offers_id = :id;
+DELETE FROM movie WHERE offers_id = :id;
+DELETE FROM watchlists WHERE offers_id = :id;
+DELETE FROM seasons WHERE offers_id = :id;
+DELETE FROM offers WHERE id = :id";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
 
         return $stmt->execute();
     }
