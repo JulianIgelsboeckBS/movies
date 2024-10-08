@@ -20,13 +20,19 @@
 			<div class="container">
 				<div class="page">
 					<div class="breadcrumbs">
-						<a href="index.html">Home</a>
+						<a href="index.php">Home</a>
 						<span>Film anlegen</span>
 					</div>
 
+<?php include __DIR__ . '/movie.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $instance = new Movie();
+    $movieData = $instance->createMovie($_POST);
+}
 
+?>
 					<!-- <div class="container mt-5"> -->
-					<form action="/add_movie" method="post" enctype="multipart/form-data">
+					<form action="" method="post" enctype="multipart/form-data">
 
 						<div class="mb-3">
 							<label for="title" class="form-label">Titel:</label>
@@ -40,7 +46,7 @@
 
 						<div class="mb-3">
 							<label for="genre" class="form-label">Genre:</label>
-							<input type="text" class="form-control" id="genre" name="genre" required>
+							<input type="number" class="form-control" id="genre" name="genre" required>
 						</div>
 
 						<div class="mb-3">
@@ -52,12 +58,15 @@
 							<label for="duration" class="form-label">Dauer (in Minuten):</label>
 							<input type="number" class="form-control" id="duration" name="duration" required>
 						</div>
-
+                        <div class="mb-3">
+                            <label for="rating" class="form-label">Bewertung:</label>
+                            <input type="number" class="form-control" id="rating" name="rating" required>
+                        </div>
 						<div class="mb-3">
 							<label for="plot" class="form-label">Handlung:</label>
 							<textarea class="form-control" id="plot" name="plot" rows="4" required></textarea>
 						</div>
-
+                        <!--
 						<div class="mb-3">
 							<label for="cast" class="form-label">Besetzung:</label>
 							<textarea class="form-control" id="cast" name="cast" rows="2" required></textarea>
@@ -67,10 +76,11 @@
 							<label for="director" class="form-label">Regie:</label>
 							<input type="text" class="form-control" id="director" name="director" required>
 						</div>
+						-->
 
 						<div class="mb-3">
 							<label for="poster" class="form-label">Poster hochladen:</label>
-							<input type="file" class="form-control" id="poster" name="poster" accept="image/*" required>
+							<input type="url" class="form-control" id="poster" name="poster"  required>
 						</div>
 
 						<div class="mb-3">
@@ -79,9 +89,9 @@
 						</div>
 
 						<div class="mb-3">
-							<label for="availability" class="form-label">Verfügbarkeit auf Streaming-Diensten:</label>
-							<textarea class="form-control" id="availability" name="availability" rows="2"
-								placeholder="z.B. Netflix, Amazon Prime" required></textarea>
+							<label for="provider" class="form-label">Verfügbarkeit auf Streaming-Diensten:</label>
+							<input class="number" id="provider" name="provider"
+								placeholder="z.B. Netflix, Amazon Prime" required></input>
 						</div>
 
 						<button type="submit" class="btn btn-warning">Film anlegen</button>

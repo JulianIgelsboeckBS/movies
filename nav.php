@@ -14,8 +14,9 @@
                     <li class="menu-item current-menu-item"><a href="index.php">Home</a></li>
                     <li class="menu-item"><a href="addMovie.php">Add Movie</a></li>
                     <li class="menu-item"><a href="about.php">About</a></li>
+                    <li class="menu-item"><a href="cms_movies_list.php">Admin</a></li>
                     <li class="menu-item"><a href="formSearch.php">Form Search</a></li>
-                    <li class="menu-item"><a href="single.php">Test</a></li>
+                    <li class="menu-item"><a href="movie_details.php">Test</a></li>
                 </ul> <!-- .menu -->
 
                 <form action="#" class="search-form">

@@ -57,17 +57,17 @@ class Movie extends DbConn
     public function createMovie($data)
     {
         $pdo = $this->connect();
-        $sql = "INSERT INTO offers (title, trailer, fsk, posterLink, originalTitle, rating, description) 
-                VALUES (:title, :trailer, :fsk, :posterLink, :originalTitle, :rating, :description)";
+        $sql = "INSERT INTO offers (title, trailer, posterLink, originalTitle, rating, description) 
+                VALUES (:title, :trailer, :posterLink, :originalTitle, :rating, :description)";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':title', $data['title']);
         $stmt->bindParam(':trailer', $data['trailer']);
-        $stmt->bindParam(':fsk', $data['fsk']);
-        $stmt->bindParam(':posterLink', $data['posterLink']);
-        $stmt->bindParam(':originalTitle', $data['originalTitle']);
+
+        $stmt->bindParam(':posterLink', $data['poster']);
+        $stmt->bindParam(':originalTitle', $data['original_title']);
         $stmt->bindParam(':rating', $data['rating']);
-        $stmt->bindParam(':description', $data['description']);
+        $stmt->bindParam(':description', $data['plot']);
 
         if ($stmt->execute()) {
             $offer_id = $pdo->lastInsertId();
@@ -75,11 +75,33 @@ class Movie extends DbConn
             $sqlMovie = "INSERT INTO movie (releaseYear, duration, offers_id) 
                          VALUES (:releaseYear, :duration, :offers_id)";
             $stmtMovie = $pdo->prepare($sqlMovie);
-            $stmtMovie->bindParam(':releaseYear', $data['releaseYear']);
+            $stmtMovie->bindParam(':releaseYear', $data['release_year']);
             $stmtMovie->bindParam(':duration', $data['duration']);
             $stmtMovie->bindParam(':offers_id', $offer_id);
 
-            return $stmtMovie->execute();
+             $stmtMovie->execute();
+
+            $sqlMovie = "INSERT INTO offershasproviders (provider_id, offers_id) 
+                         VALUES (:provider_id, :offers_id)";
+            $stmtMovie = $pdo->prepare($sqlMovie);
+
+            $stmtMovie->bindParam(':provider_id', $data['provider']);
+            $stmtMovie->bindParam(':offers_id', $offer_id);
+
+            $stmtMovie->execute();
+
+            $sqlMovie = "INSERT INTO offershasgenres (genres_id, offers_id) 
+                         VALUES (:genres_id, :offers_id)";
+            $stmtMovie = $pdo->prepare($sqlMovie);
+
+            $stmtMovie->bindParam(':genres_id', $data['genre']);
+            $stmtMovie->bindParam(':offers_id', $offer_id);
+
+            $stmtMovie->execute();
+
+            return true;
+
+
         }
 
         return false;

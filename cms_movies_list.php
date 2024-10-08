@@ -27,6 +27,7 @@
                     <span>Filme</span>
                 </div>
                     <h2 class="text-center">Movies List</h2>
+                <a href="addMovie.php" class="btn btn-primary btn-sm">Add Movie</a>
                     <table class="table  table-striped table-bordered">
                         <thead class="thead-dark">
                         <tr>
