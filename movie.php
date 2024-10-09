@@ -255,7 +255,7 @@ DELETE FROM offers WHERE id = :id;";
     public function getAllMovies()
     {
         $pdo = $this->connect();
-        $sql = "SELECT o.id, o.title, o.description, o.rating,o.posterlink, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers, g.name AS genre
+        $sql = "SELECT o.id, o.title, o.description, o.rating,o.posterlink, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers,p.id as providerId, g.name AS genre, g.id as genreId
         FROM offers o
         JOIN movie m ON o.id = m.offers_id
         JOIN offersHasGenres og ON o.id = og.offers_id
