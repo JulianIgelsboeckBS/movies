@@ -16,7 +16,8 @@
                     <li class="menu-item"><a href="about.php">About</a></li>
                     <li class="menu-item"><a href="cms_movies_list.php">Admin</a></li>
                     <li class="menu-item"><a href="formSearch.php">Form Search</a></li>
-                    <li class="menu-item"><a href="movie_details.php">Test</a></li>
+                    <li class="menu-item"><a href="movie_details.php">Movie Details</a></li>
+                    <li class="menu-item"><a href="login.php">Login</a></li>
                 </ul> <!-- .menu -->
 
                 <form action="#" class="search-form">

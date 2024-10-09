@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 
-    <title>Movie Review</title>
+    <title>Movie Review </title>
     <?php require_once("movie.php");
     $movie = new Movie();
     $results = $movie->getAllMovies();

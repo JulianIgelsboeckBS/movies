@@ -1,3 +1,23 @@
+<?php
+session_start();
+//error_reporting(0);
+include('DbConn.php');
+if(strlen($_SESSION['alogin'])==0)
+{
+    header('location:login.php');
+}
+else{
+    $instance= new DbConn();
+    $dbh = $instance->connect();
+    $email = $_SESSION['alogin'];
+    $sql = "SELECT * from users where email = (:email);";
+    $query = $dbh -> prepare($sql);
+    $query-> bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    $loginData=$query->fetch(PDO::FETCH_OBJ);
+    $cnt=1;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +26,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 
-    <title>Movie Review | Add Movie</title>
+    <title>Search <?= $loginData->name;?></title>
     <!-- Latest compiled and minified CSS -->
     <?php include __DIR__ . '/head.php'; ?>
 
 </head>
-
+<?php echo htmlentities($loginData->name);?>
 
 <body>
 <div id="site-content">
