@@ -33,7 +33,7 @@ if(isset($_POST['submit']))
     $querynoti-> bindParam(':notitype', $notitype, PDO::PARAM_STR);
     $querynoti->execute();
 
-    $sql ="INSERT INTO userslogin(name,email, password, gender, mobile, designation, image, status) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image, 1)";
+    $sql ="INSERT INTO users(name,email, password, gender, mobile, designation, image, status) VALUES(:name, :email, :password, :gender, :mobileno, :designation, :image, 2)";
     $query= $dbh -> prepare($sql);
     $query-> bindParam(':name', $name, PDO::PARAM_STR);
     $query-> bindParam(':email', $email, PDO::PARAM_STR);

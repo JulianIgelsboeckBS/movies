@@ -4,7 +4,7 @@ error_reporting(0);
 include('DbConn.php');
 if(strlen($_SESSION['alogin'])==0)
 {
-    header('location:login.php');
+    //header('location:login.php');
 }
 else{
     $instance= new DbConn();
@@ -35,7 +35,17 @@ else{
 
 <body>
 <div id="site-content">
-    <?php include __DIR__ . '/nav.php'; ?>
+<?php 
+    if($status == 1 || $status == 2)
+        {
+            if($status == 2){ include __DIR__ . '/navAdmin.php';}
+            else{ include __DIR__ . '/navLogout.php';}
+        }
+    
+    else
+        {include __DIR__ . '/nav.php';}
+    
+    ?>
     <main class="main-content">
         <div class="container">
             <div class="page">

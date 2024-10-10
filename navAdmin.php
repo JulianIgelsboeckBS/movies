@@ -1,4 +1,3 @@
-
 <header class="site-header">
     <div class="container">
         <a href="index.php" id="branding">
@@ -12,15 +11,14 @@
             <div class="main-navigation">
                 <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                 <ul class="menu">
-                    <li class="menu-item current-menu-item"><a href="index.php">Home</a></li>                    
-                    <!-- <li class="menu-item"><a href="about.php">About</a></li> -->
-                    <li class="menu-item"><a href="formSearch.php">Filmsuche</a></li>
-                    <li class="menu-item"><a href="movie_details.php">Filmdetails</a></li>
-                    <li class="menu-item"><a href="login.php">Login</a></li>
+                    <li class="menu-item current-menu-item"><a href="index.php">Home</a></li>
+                    <li class="menu-item current-menu-item"><a href="addMovie.php">Film erstellen</a></li>
+                    <li class="menu-item"><a href="cms_movies_list.php">Filmtabelle</a></li>
+                    <li class="menu-item"><a href="logout.php">Logout</a></li>
                 </ul> <!-- .menu -->
 
                 <form action="#" class="search-form">
-                    <input type="text" placeholder="Search..." id="searchfield" >
+                    <input type="text" placeholder="Search..." id="searchfield">
                     <button><i class="fa fa-search"></i></button>
                     <!-- <button class="btn" id="disableFilter">Filter ausblenden</button> -->
                 </form>
@@ -30,7 +28,3 @@
         </nav>
     </div>
 </header>
-
-
-
-

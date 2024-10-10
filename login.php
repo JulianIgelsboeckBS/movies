@@ -5,21 +5,21 @@ if(isset($_POST['login']))
 {
     $instance= new DbConn();
     $dbh = $instance->connect();
-    $status='1';
+    //$status='1';
     $email=$_POST['username'];
     $password=md5($_POST['password']);
-    $sql ="SELECT email,password FROM users WHERE email=:email and password=:password and status=(:status)";
+    $sql ="SELECT email,password FROM users WHERE email=:email and password=:password";
     $query= $dbh-> prepare($sql);
     $query-> bindParam(':email', $email, PDO::PARAM_STR);
     $query-> bindParam(':password', $password, PDO::PARAM_STR);
-    $query-> bindParam(':status', $status, PDO::PARAM_STR);
+    //$query-> bindParam(':status', $status, PDO::PARAM_STR);
     $query-> execute();
-    $results=$query->fetchAll(PDO::FETCH_OBJ);
+    $loginData=$query->fetchAll(PDO::FETCH_OBJ);
     if($query->rowCount() > 0)
     {
         $_SESSION['alogin']=$_POST['username'];
-        $_SESSION['status']=$status;
-        echo "<script type='text/javascript'> document.location = 'formSearch.php'; </script>";
+        $_SESSION['status']=$loginData['status'];
+        echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
     } else{
 
         echo "<script>alert('Invalid Details Or Account Not Confirmed');</script>";

@@ -1,4 +1,25 @@
+<?php
+session_start();
+error_reporting(0);
+include('DbConn.php');
 
+if(strlen($_SESSION['alogin'])==0)
+{
+    // header('location:index.php');
+}
+else{
+    $instance= new DbConn();
+    $dbh = $instance->connect();
+    $email = $_SESSION['alogin'];
+    $sql = "SELECT * from users where email = (:email);";
+    $query = $dbh -> prepare($sql);
+    $query-> bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    $loginData=$query->fetch(PDO::FETCH_OBJ);
+    $cnt=1;
+    $status=$loginData->status;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +43,18 @@
 
 
 <div id="site-content">
-    <?php include __DIR__ . '/nav.php'; ?>
+    <?php 
+    if($status == 1 || $status == 2)
+        {
+            if($status == 2){ include __DIR__ . '/navAdmin.php';}
+            else{ include __DIR__ . '/navLogout.php';}
+        }
+    
+    else
+        {include __DIR__ . '/nav.php';}
+    
+    ?>
+   
     <main class="main-content">
         <div class="page">
             <div class="container">
