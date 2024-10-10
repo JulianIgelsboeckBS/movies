@@ -1,3 +1,27 @@
+<?php
+session_start();
+error_reporting(0);
+include('DbConn.php');
+
+if(strlen($_SESSION['alogin'])==0)
+{
+    header('location:login.php');
+}
+else{
+    $instance= new DbConn();
+    $dbh = $instance->connect();
+    $email = $_SESSION['alogin'];
+    $sql = "SELECT * from users where email = (:email);";
+    $query = $dbh -> prepare($sql);
+    $query-> bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    $loginData=$query->fetch(PDO::FETCH_OBJ);
+    $cnt=1;
+    $status=$loginData->status;
+
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +51,7 @@
                     <span>Filme</span>
                 </div>
                     <h2 class="text-center">Movies List</h2>
-                <a href="addMovie.php" class="btn btn-primary btn-sm">Add Movie</a>
+
                     <table class="table  table-striped table-bordered">
                         <thead class="thead-dark">
                         <tr>
@@ -38,7 +62,9 @@
                             <th>Providers</th>
                             <th>Genre</th>
                             <th>Poster</th>
+                            <?php if($status == 0): ?>
                             <th>Actions</th>
+                            <?php endif; ?>
                         </tr>
                         </thead>
                         <tbody>
@@ -51,13 +77,14 @@
                                 <td><?= htmlspecialchars($movie['providers']) ?></td>
                                 <td><?= htmlspecialchars($movie['genre']) ?></td>
                                 <td><img src="<?= htmlspecialchars($movie['posterlink']) ?>" alt="<?= htmlspecialchars($movie['title']) ?>" width="100"></td>
+                                <?php if($status == 0): ?>
                                 <td>
-                                    <!-- Update and Delete buttons with the movie ID passed as query params -->
+                                        <!-- Update and Delete buttons with the movie ID passed as query params -->
+                                    <a href="addMovie.php" class="btn btn-primary btn-sm">Add Movie</a>
                                     <a href="updateMovie.php?id=<?= $movie['id'] ?>" class="btn btn-primary btn-sm">Update</a>
-                                    <button class="btn btn-danger btn-sm mt-2" onclick="confirmDelete(<?= $movie['id'] ?>)">Delete</button>
-
-
+                                    <button class="btn btn-primary btn-sm" onclick="confirmDelete(<?= $movie['id'] ?>)">Delete</button>
                                 </td>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>

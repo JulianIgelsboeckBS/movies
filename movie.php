@@ -56,7 +56,7 @@ class Movie extends DbConn
     // Create a new movie record in the database
     public function createMovie($data)
     {
-        $pdo = $this->connect();
+        $pdo = $this->connectAdmin();
         $sql = "INSERT INTO offers (title, trailer, posterLink, originalTitle, rating, description) 
                 VALUES (:title, :trailer, :posterLink, :originalTitle, :rating, :description)";
 
@@ -110,7 +110,7 @@ class Movie extends DbConn
     // Update an existing movie record
     public function updateMovie($data)
     {
-        $pdo = $this->connect();
+        $pdo = $this->connectAdmin();
         $sql = "UPDATE offers o
                 JOIN movie m ON o.id = m.offers_id
                 SET o.title = :title, o.trailer = :trailer, o.fsk = :fsk, 
@@ -135,7 +135,7 @@ class Movie extends DbConn
     }
     public function deleteMovie($sid): bool
     {
-        $pdo = $this->connect();
+        $pdo = $this->connectAdmin();
 
         try {
             // Start a transaction
@@ -206,36 +206,9 @@ class Movie extends DbConn
         }
     }
 
-    public function deleteMoviee($id){
-    $pdo = $this->connect();
-    $sqlDeleteProviders = "DELETE FROM offershasgenres WHERE offers_id = :id";
-    $stmtDeleteProviders = $pdo->prepare($sqlDeleteProviders);
-    $stmtDeleteProviders->execute([':id' => $id]);
 
-    $sqlDeleteProviders = "DELETE FROM offersHasProviders WHERE offers_id = :id";
-    $stmtDeleteProviders = $pdo->prepare($sqlDeleteProviders);
-    $stmtDeleteProviders->execute([':id' => $id]);
-}
-    // Delete a movie by ID
-    public  function  deleteMovies($sid):bool
-    {
-        $pdo = $this->connect();
-        $sql = "DELETE FROM offershasgenres WHERE offers_id = :id;
-DELETE FROM offersHasProviders WHERE offers_id = :id;
-DELETE FROM actors WHERE movies_id = :id;
-DELETE FROM directors WHERE movies_id = :id;
-DELETE FROM hasdubs WHERE offers_id = :id;
-DELETE FROM hassubs WHERE offers_id = :id;
-DELETE FROM movie WHERE offers_id = :id;
-DELETE FROM watchlists WHERE offers_id = :id;
-DELETE FROM seasons WHERE offers_id = :id;
-DELETE FROM offers WHERE id = :id;";
+// Delete a movie by ID
 
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id', $sid, PDO::PARAM_INT);
-
-        return $stmt->execute();
-    }
 
     // Get all movies
     public function fetchAllMovies()

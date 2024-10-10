@@ -6,7 +6,7 @@ class MovieManager extends DbConn
     // Function to get the movie details by ID
     public function getMovieById($id)
     {
-        $pdo = $this->connect();
+        $pdo = $this->connectAdmin();
         $sql = "SELECT o.id, o.title, o.description, o.rating, o.posterlink, m.releaseYear, GROUP_CONCAT(p.id SEPARATOR ',') AS provider_ids, g.id AS genre_id
                 FROM offers o
                 JOIN movie m ON o.id = m.offers_id
@@ -24,7 +24,7 @@ class MovieManager extends DbConn
     // Function to update movie details
     public function updateMovie($id, $title, $description, $rating, $releaseYear, $posterLink, $genre_id, $providers)
     {
-        $pdo = $this->connect();
+        $pdo = $this->connectAdmin();
         try {
             $pdo->beginTransaction();
 

@@ -5,9 +5,8 @@ class DbConn
 
      function connect()
     {
-
         $host = "localhost";
-        $user = "root";
+        $user = "webuser";
         $password = "";
         $database = "streamingportal";
 
@@ -22,6 +21,23 @@ class DbConn
 
     }
 
+    function connectAdmin()
+    {
+        $host = "localhost";
+        $user = "redakteur";
+        $password = "";
+        $database = "streamingportal";
+
+        try {
+            $pdo = new PDO("mysql:host=$host;dbname=$database", $user, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+        } catch
+        (PDOException $e) {
+            die("Datenbankverbindung fehlgeschlagen: " . $e->getMessage());
+        }
+
+    }
      public function SelectAllOffers()
     {
         $pdo = $this->connect();
