@@ -1,7 +1,8 @@
 <?php
 require_once("DbConn.php");
 class Movie extends DbConn
-{
+{   public $pdo;
+
     public $id;
     public $title;
     public $trailer;
@@ -14,18 +15,18 @@ class Movie extends DbConn
     public $duration;
     public $offers_id;
 
-    public function __construct($id = null)
+    public function __construct($isAdmin = null)
     {
-        $this->id = $id;
-        if ($id) {
-            $this->fetchMovieById($id);
+        $this->pdo = $this->connect();
+        if ($isAdmin) {
+            $this->pdo= $this->connectAdmin();
         }
     }
 
     // Fetch movie by ID from the database
     public function fetchMovieById($id)
     {
-        $pdo = $this->connect();
+        $pdo = $this->pdo;
         $sql = "SELECT o.id, o.title, o.trailer, o.fsk, o.posterLink, o.originalTitle, 
                        o.rating, o.description, m.releaseYear, m.duration, m.offers_id
                 FROM offers o 
@@ -56,7 +57,7 @@ class Movie extends DbConn
     // Create a new movie record in the database
     public function createMovie($data)
     {
-        $pdo = $this->connectAdmin();
+        $pdo = $this->pdo;
         $sql = "INSERT INTO offers (title, trailer, posterLink, originalTitle, rating, description) 
                 VALUES (:title, :trailer, :posterLink, :originalTitle, :rating, :description)";
 
@@ -110,7 +111,7 @@ class Movie extends DbConn
     // Update an existing movie record
     public function updateMovie($data)
     {
-        $pdo = $this->connectAdmin();
+        $pdo = $this->pdo;
         $sql = "UPDATE offers o
                 JOIN movie m ON o.id = m.offers_id
                 SET o.title = :title, o.trailer = :trailer, o.fsk = :fsk, 
@@ -228,7 +229,7 @@ class Movie extends DbConn
     public function getAllMovies()
     {
         $pdo = $this->connect();
-        $sql = "SELECT o.id, o.title, o.description, o.rating,o.posterlink, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers,p.id as providerId, g.name AS genre, g.id as genreId
+        $sql = "SELECT o.id, o.title, o.description, o.rating,o.posterlink, m.releaseYear, p.name AS providers,p.id as providerId, g.name AS genre, g.id as genreId
         FROM offers o
         JOIN movie m ON o.id = m.offers_id
         JOIN offersHasGenres og ON o.id = og.offers_id

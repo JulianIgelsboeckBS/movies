@@ -6,8 +6,8 @@ include('DbConn.php');
 if (strlen($_SESSION['alogin']) == 0) {
     //header('location:cms_movies_list.php');
 } else {
-    $instance = new DbConn();
-    $dbh = $instance->connect();
+    $dbConn = new DbConn();
+    $dbh = $dbConn->connect();
     $email = $_SESSION['alogin'];
     $sql = "SELECT * from users where email = (:email);";
     $query = $dbh->prepare($sql);
@@ -32,8 +32,8 @@ if (strlen($_SESSION['alogin']) == 0) {
     <!-- Latest compiled and minified CSS -->
     <?php include __DIR__ . '/head.php'; ?>
     <?php include __DIR__ . '/movie.php';
-    $instance = new Movie();
-    $movies = $instance->getAllMovies() ?>
+    $instanceMovie = new Movie();
+    $movies = $instanceMovie->getAllMovies() ?>
 
 </head>
 

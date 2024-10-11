@@ -16,6 +16,7 @@ else{
     $query->execute();
     $loginData=$query->fetch(PDO::FETCH_OBJ);
     $cnt=1;
+    $status = $loginData->status;
 }
 ?>
 <!DOCTYPE html>

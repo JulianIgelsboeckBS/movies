@@ -27,6 +27,13 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    
+
+    <script src="disableFilter.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/app.js"></script>
+
 
     <title>Movie Review </title>
     <?php require_once("movie.php");
@@ -106,13 +113,7 @@ else{
     <?php include __DIR__ . '/footer.php'; ?>
 </div>
 <!-- Default snippet for navigation -->
-
 <link href="owlCarousel.css" rel="stylesheet" type="text/css" media="all">
-
-<script src="disableFilter.js"></script>
-<script src="js/jquery-1.11.1.min.js"></script>
-<script src="js/plugins.js"></script>
-<script src="js/app.js"></script>
 <script src="owlCarousel.js"></script>
 <script>
     $(document).ready(function () {
@@ -130,6 +131,7 @@ else{
 
     });
 </script>
+
 
 </body>
 

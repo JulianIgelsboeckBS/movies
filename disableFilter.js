@@ -3,7 +3,7 @@ window.onload = function () {
     
 
 
-document.getElementById('disableFilter').addEventListener("click",hideFilter);
+//document.getElementById('disableFilter').addEventListener("click",hideFilter);
 
 //document.getElementsByClassName("search-form").addEventListener("submit",log);
 

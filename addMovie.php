@@ -1,4 +1,26 @@
 <?php
+session_start();
+error_reporting(0);
+include('DbConn.php');
+
+if (strlen($_SESSION['alogin']) == 0) {
+    //header('location:cms_movies_list.php');
+} else {
+    $dbConn = new DbConn();
+    $dbh = $dbConn->connect();
+    $email = $_SESSION['alogin'];
+    $sql = "SELECT * from users where email = (:email);";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    $loginData = $query->fetch(PDO::FETCH_OBJ);
+    $cnt = 1;
+    $status = $loginData->status;
+
+
+}
+?>
+<?php
 //require_once("DbConn.php");
 require_once("filterQueries.php");
 $db = new DbConn();
@@ -34,7 +56,18 @@ $providers = $pdo->query($providerQuery)->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
 <div id="site-content">
-    <?php include __DIR__ . '/nav.php'; ?>
+<?php
+        if ($status == 1 || $status == 2) {
+            if ($status == 1) {
+                include __DIR__ . '/navLogout.php';
+            } else {
+                include __DIR__ . '/navAdmin.php';
+            }
+        } else {
+            include __DIR__ . '/nav.php';
+        }
+
+        ?>
     <main class="main-content">
         <div class="container">
             <div class="page">
