@@ -29,7 +29,7 @@
 
 					<div class="row">
 						<div class="col-md-4">
-							<figure><img src="dummy/figure.jpg" alt="figure image"></figure>
+							<figure><img src="../dummy/figure.jpg" alt="figure image"></figure>
 						</div>
 						<div class="col-md-8">
 							<p class="leading">Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -82,7 +82,7 @@
 
 						<div class="col-md-3">
 							<div class="team">
-								<figure class="team-image"><img src="dummy/person-1.jpg" alt=""></figure>
+								<figure class="team-image"><img src="../dummy/person-1.jpg" alt=""></figure>
 								<h2 class="team-name">Sarah Stuart</h2>
 								<small class="team-title">Co-founder</small>
 								<div class="social-links">
@@ -95,7 +95,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="team">
-								<figure class="team-image"><img src="dummy/person-2.jpg" alt=""></figure>
+								<figure class="team-image"><img src="../dummy/person-2.jpg" alt=""></figure>
 								<h2 class="team-name">John Doe</h2>
 								<small class="team-title">Managing Director</small>
 								<div class="social-links">
@@ -108,7 +108,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="team">
-								<figure class="team-image"><img src="dummy/person-3.jpg" alt=""></figure>
+								<figure class="team-image"><img src="../dummy/person-3.jpg" alt=""></figure>
 								<h2 class="team-name">Jessica Branson</h2>
 								<small class="team-title">Reviewer</small>
 								<div class="social-links">
@@ -121,7 +121,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="team">
-								<figure class="team-image"><img src="dummy/person-4.jpg" alt=""></figure>
+								<figure class="team-image"><img src="../dummy/person-4.jpg" alt=""></figure>
 								<h2 class="team-name">Sarah Stuart</h2>
 								<small class="team-title">Consultant</small>
 								<div class="social-links">
@@ -143,9 +143,9 @@
 
 
 
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/app.js"></script>
+	<script src="../js/jquery-1.11.1.min.js"></script>
+	<script src="../js/plugins.js"></script>
+	<script src="../js/app.js"></script>
 
 </body>
 

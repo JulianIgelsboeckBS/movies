@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('DbConn.php');
+include('./models/DbConn.php');
 
 if(strlen($_SESSION['alogin'])==0)
 {
@@ -27,16 +27,17 @@ else{
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-    
 
-    <script src="disableFilter.js"></script>
+
+    <script src="js/disableFilter.js"></script>
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/app.js"></script>
 
 
+
     <title>Movie Review </title>
-    <?php require_once("movie.php");
+    <?php require_once("./models/movie.php");
     $movie = new Movie();
     $results = $movie->getAllMovies();
     ?>
@@ -113,13 +114,13 @@ else{
     <?php include __DIR__ . '/footer.php'; ?>
 </div>
 <!-- Default snippet for navigation -->
-<link href="owlCarousel.css" rel="stylesheet" type="text/css" media="all">
-<script src="owlCarousel.js"></script>
+<script src="js/owlCarousel.js"></script>
+<link href="css/owlCarousel.css" rel="stylesheet" type="text/css" media="all">
 <script>
     $(document).ready(function () {
         $("#owl-demo").owlCarousel({
 
-            autoPlay: 3000, //Set AutoPlay to 3 seconds
+            autoPlay: 2000, //Set AutoPlay to 3 seconds
             autoPlay: true,
             navigation: false,
 
@@ -131,6 +132,8 @@ else{
 
     });
 </script>
+
+
 
 
 </body>

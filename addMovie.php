@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('DbConn.php');
+include('models/DbConn.php');
 
 if (strlen($_SESSION['alogin']) == 0) {
     //header('location:cms_movies_list.php');
@@ -22,7 +22,7 @@ if (strlen($_SESSION['alogin']) == 0) {
 ?>
 <?php
 //require_once("DbConn.php");
-require_once("filterQueries.php");
+require_once("models/filterQueries.php");
 $db = new DbConn();
 $pdo = $db->connect();
 
@@ -76,7 +76,7 @@ $providers = $pdo->query($providerQuery)->fetchAll(PDO::FETCH_ASSOC);
                     <span>Film anlegen</span>
                 </div>
 
-                <?php include __DIR__ . '/movie.php';
+                <?php include __DIR__ . '/models/movie.php';
                 $instance = new Movie();
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $movieData = $instance->createMovie($_POST);

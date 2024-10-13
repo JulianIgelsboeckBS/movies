@@ -1,42 +1,57 @@
 <?php
-// Connection to MySQL
-$host = 'localhost';
-$db = 'streamingPortal';
-$user = 'root';
-$pass = '';
+session_start();
+error_reporting(0);
+include('./models/DbConn.php');
 
-$pdo = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
+if(strlen($_SESSION['alogin'])==0)
+{
+    // header('location:index.php');
+}
+else{
+    $instance= new DbConn();
+    $dbh = $instance->connect();
+    $email = $_SESSION['alogin'];
+    $sql = "SELECT * from users where email = (:email);";
+    $query = $dbh -> prepare($sql);
+    $query-> bindParam(':email', $email, PDO::PARAM_STR);
+    $query->execute();
+    $loginData=$query->fetch(PDO::FETCH_OBJ);
+    $cnt=1;
+    $status=$loginData->status;
+}
+
 
 // Get the movie ID from the URL
 $movieId = $_GET['id'] ?? null;
 
 if ($movieId) {
-    // Fetch movie details by ID
-    $query = "
-         SELECT o.title, o.description, o.rating, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers,
-               g.name AS genre, m.duration, fpd.lastname as director, fpa.lastname as actor
-        FROM offers o
-        JOIN movie m ON o.id = m.offers_id
-        JOIN offersHasGenres og ON o.id = og.offers_id
-        JOIN genres g ON og.genres_id = g.id
-        JOIN offersHasProviders op ON o.id = op.offers_id
-        JOIN providers p ON op.provider_id = p.id
-        join directors d on d.movies_id = m.id
-        join filmindustryprofessional fpd on fpd.id = d.filmIndustryProfessional_id
-        join actors a on a.movies_id = m.id
-        join filmindustryprofessional fpa on fpa.id = a.filmIndustryProfessional_id
-        WHERE o.id = :id
-        GROUP BY o.title;";
 
-    $stmt = $pdo->prepare($query);
-    $stmt->execute([':id' => $movieId]);
+     function getMovieById($id)
+    {
+        $db = new DbConn;
+        $pdo = $db->connect();
+        $sql = "SELECT  o.title, o.description, o.rating, o.posterlink,m.duration, m.releaseYear, p.name AS provider, g.name AS genre
+                FROM offers o
+                JOIN movie m ON o.id = m.offers_id
+                JOIN offersHasGenres og ON o.id = og.offers_id
+                JOIN genres g ON og.genres_id = g.id
+                JOIN offersHasProviders op ON o.id = op.offers_id
+                JOIN providers p ON op.provider_id = p.id
+                WHERE o.id = :id
+                GROUP BY o.title";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    $movie = getMovieById($movieId);
 
-    $movie = $stmt->fetch(PDO::FETCH_ASSOC);
 } else {
     // Redirect or show error if no ID is provided
     header('Location: index.php');
     exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -53,21 +68,31 @@ if ($movieId) {
 
 <body>
     <div id="site-content">
-        <?php include __DIR__ . '/nav.php'; ?>
+        <?php
+        if($status == 1 || $status == 2)
+        {
+            if($status == 2){ include __DIR__ . '/navAdmin.php';}
+            else{ include __DIR__ . '/navLogout.php';}
+        }
+
+        else
+        {include __DIR__ . '/nav.php';}
+
+        ?>
 
         <main class="main-content">
             <div class="container">
                 <div class="page">
                     <div class="breadcrumbs">
-                        <a href="index.html">Home</a>
-                        <a href="review.html">Movie Review</a>
+                        <a href="index.php">Home</a>
+                        <a href="review.php">Movie Review</a>
                         <span><?= htmlspecialchars($movie['title']) ?></span>
                     </div>
 
                     <div class="content">
                         <div class="row">
                             <div class="col-md-6">
-                                <figure class="movie-poster"><img src="../dummy/single-image.jpg" alt="#"></figure>
+                                <figure class="movie-poster"><img src="<?= htmlspecialchars($movie['posterlink']) ?>" alt="#"></figure>
                             </div>
                             <div class="col-md-6">
                                 <h2 class="movie-title"><?= htmlspecialchars($movie['title']) ?></h2>
@@ -76,9 +101,9 @@ if ($movieId) {
                                 </div>
                                 <ul class="movie-meta">
                                     <li><strong>Rating:</strong>
-                                        <div class="star-rating" title="Rated <?= htmlspecialchars($movie['rating']) ?> out of 5">
+                                        <div class="star-rating" title="Rated <?= htmlspecialchars($movie['rating']) ?> out of 10">
                                             <span style="width:<?= htmlspecialchars($movie['rating']) * 20 ?>%">
-                                                <strong class="rating"><?= htmlspecialchars($movie['rating']) ?></strong> out of 5
+                                                <strong class="rating"><?= htmlspecialchars($movie['rating']) ?></strong> out of 10
                                             </span>
                                         </div>
                                     </li>
@@ -87,10 +112,10 @@ if ($movieId) {
                                     <li><strong>Category:</strong> <?= htmlspecialchars($movie['genre']) ?></li>
                                 </ul>
 
-                                <ul class="starring">
-                                    <li><strong>Directors:</strong> <?= htmlspecialchars($movie['director']) ?></li>
-                                    <li><strong>Stars:</strong> <?= htmlspecialchars($movie['actor']) ?></li>
-                                </ul>
+                                <!--<ul class="starring">
+                                    <li><strong>Directors:</strong> <?php /*= htmlspecialchars($movie['director']) */?></li>
+                                    <li><strong>Stars:</strong> <?php /*= htmlspecialchars($movie['actor']) */?></li>
+                                </ul>-->
                             </div>
                         </div>
                         <div class="entry-content">
@@ -104,9 +129,9 @@ if ($movieId) {
         <?php include __DIR__ . '/footer.php'; ?>
     </div>
 
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/plugins.js"></script>
-    <script src="../js/app.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 

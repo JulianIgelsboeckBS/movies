@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('DbConn.php');
+include('models/DbConn.php');
 if(isset($_POST['login']))
 {
     $instance= new DbConn();
@@ -46,7 +46,7 @@ if(isset($_POST['login']))
     <link rel="stylesheet" href="css/bootstrap-select.css">
     <link rel="stylesheet" href="css/fileinput.min.css">
     <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
@@ -69,7 +69,7 @@ if(isset($_POST['login']))
                                 <button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
                             </form>
                             <br>
-                            <p>Don't Have an Account? <a href="register.php" >Signup</a></p>
+                            <p>Don't Have an Account? <a href="../register.php" >Signup</a></p>
                         </div>
                     </div>
                 </div>

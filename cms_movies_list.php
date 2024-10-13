@@ -1,7 +1,7 @@
 <?php
 session_start();
 error_reporting(0);
-include('DbConn.php');
+include('models/DbConn.php');
 
 if (strlen($_SESSION['alogin']) == 0) {
     //header('location:cms_movies_list.php');
@@ -31,7 +31,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     <title>Filmtabelle</title>
     <!-- Latest compiled and minified CSS -->
     <?php include __DIR__ . '/head.php'; ?>
-    <?php include __DIR__ . '/movie.php';
+    <?php include __DIR__ . '/models/movie.php';
     $instanceMovie = new Movie();
     $movies = $instanceMovie->getAllMovies() ?>
 

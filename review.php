@@ -17,7 +17,7 @@
 			<div class="container">
 				<div class="page">
 					<div class="breadcrumbs">
-						<a href="index.html">Home</a>
+						<a href="index.php">Home</a>
 						<span>Movie Review</span>
 					</div>
 

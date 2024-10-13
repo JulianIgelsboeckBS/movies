@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('DbConn.php');
+include('models/DbConn.php');
 if(isset($_POST['login']))
 {
     $instance= new DbConn();
@@ -64,12 +64,12 @@ if(isset($_POST['login']))
                                         <div class="col-md-8 col-md-offset-2">
                                             <form method="post">
 
-                                                <label for="" class="text-uppercase text-sm">Your Email</label>
-                                                <input type="text" placeholder="Username" name="username" class="form-control mb" required>
+                                                <label for="" class="text-uppercase text-sm mb-1">Your Email</label>
+                                                <input type="text" placeholder="Username" name="username" class="form-control mb-2" required>
 
-                                                <label for="" class="text-uppercase text-sm">Password</label>
+                                                <label for="" class="text-uppercase text-sm mb-1">Password</label>
                                                 <input type="password" placeholder="Password" name="password" class="form-control mb" required>
-                                                <button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>
+                                                <button class="btn btn-warning btn-block mt-2" name="login" type="submit">LOGIN</button>
                                             </form>
                                             <br>
                                             <p>Don't Have an Account? <a href="register.php" >Signup</a></p>

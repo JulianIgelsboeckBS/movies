@@ -1,4 +1,4 @@
-<?php require_once("movie.php");
+<?php require_once("models/movie.php");
 $movie = new Movie();
 $results = $movie->getAllMovies();
 ?>

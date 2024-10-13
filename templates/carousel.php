@@ -12,13 +12,13 @@
     <!-- The slideshow/carousel -->
     <div class="carousel-inner ">
         <div class="carousel-item active">
-            <img src="dummy/thumb-4.jpg" alt="Los Angeles" class="d-block" style="width:100%">
+            <img src="../dummy/thumb-4.jpg" alt="Los Angeles" class="d-block" style="width:100%">
         </div>
         <div class="carousel-item">
-            <img src="dummy/thumb-5.jpg" alt="Chicago" class="d-block" style="width:100%">
+            <img src="../dummy/thumb-5.jpg" alt="Chicago" class="d-block" style="width:100%">
         </div>
         <div class="carousel-item">
-            <img src="dummy/thumb-6.jpg" alt="New York" class="d-block" style="width:100%">
+            <img src="../dummy/thumb-6.jpg" alt="New York" class="d-block" style="width:100%">
         </div>
     </div>
 

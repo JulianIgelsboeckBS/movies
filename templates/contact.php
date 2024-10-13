@@ -20,7 +20,7 @@
 			<div class="container">
 				<div class="page">
 					<div class="breadcrumbs">
-						<a href="index.html">Home</a>
+						<a href="../index.php">Home</a>
 						<span>Contact</span>
 					</div>
 
@@ -30,16 +30,16 @@
 								<h2>Contact</h2>
 								<ul class="contact-detail">
 									<li>
-										<img src="images/icon-contact-map.png" alt="#">
+										<img src="../images/icon-contact-map.png" alt="#">
 										<address><span>Company name. INC</span> <br>550 Avenue Street, New york
 										</address>
 									</li>
 									<li>
-										<img src="images/icon-contact-phone.png" alt="">
+										<img src="../images/icon-contact-phone.png" alt="">
 										<a href="tel:1590912831">+1 590 912 831</a>
 									</li>
 									<li>
-										<img src="images/icon-contact-message.png" alt="">
+										<img src="../images/icon-contact-message.png" alt="">
 										<a href="mailto:contact@companyname.com">contact@companyname.com</a>
 									</li>
 								</ul>
@@ -67,10 +67,10 @@
 
 
 
-	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="../js/jquery-1.11.1.min.js"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/app.js"></script>
+	<script src="../js/plugins.js"></script>
+	<script src="../js/app.js"></script>
 
 </body>
 

@@ -1,5 +1,5 @@
 <?php
-require_once 'DbConn.php';
+require_once 'models/DbConn.php';
 
 class MovieManager extends DbConn
 {

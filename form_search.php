@@ -1,6 +1,6 @@
 <?php
-//require_once("DbConn.php");
-require_once("filterQueries.php");
+//require_once("models/DbConn.php");
+require_once("models/filterQueries.php");
 $db = new DbConn();
 $pdo = $db->connect();
 

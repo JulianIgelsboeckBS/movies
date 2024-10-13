@@ -1,7 +1,7 @@
 <html>
 <body>
 <?php
-require_once("movie.php");
+require_once("models/movie.php");
 
 $movie = new movie(2);
 echo $movie->title;
