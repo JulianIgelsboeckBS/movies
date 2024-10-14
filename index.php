@@ -43,10 +43,6 @@ if (strlen($_SESSION['alogin']) == 0) {
 
 </head>
 
-
-<>
-
-
 <div id="site-content">
     <?php
     if ($status == 1 || $status == 2) {
@@ -65,6 +61,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <div class="page">
             <div class="container">
                 <div class="row">
+                    <p id="watchlists"></p>
                     <?php include __DIR__ . '/searchFilterCollaps.php'; ?>
                     <?php include __DIR__ . '/slider.php'; ?>
 
@@ -96,7 +93,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
                                                             <strong>Providers:</strong> <?= $result['providers'] ?><br>
                                                             <?php if ($status == 1): ?>
-                                                                <button class="btn btn-light" id="watchlistButton" value="<?= $result['id'] ?>" onclick="watchlist()"><i
+                                                                <button class="btn btn-light" id="watchlistButton" value="<?= $result['id'] ?>" onclick="watchlist()" ><i
                                                                             class="fa fa-heart"></i> Add to watchlist
                                                                 </button>
 
@@ -143,22 +140,23 @@ if (strlen($_SESSION['alogin']) == 0) {
         xhr.open("GET", "get_watchlist.php?movie_id=" + movieId, true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("watchlist").innerHTML = xhr.responseText;
+                document.getElementById("watchlists").innerHTML = xhr.responseText;
             }
         };
         xhr.send();
-    }
+    };
+
     function watchlist() {
         var movieId = document.getElementById("watchlistButton").valueOf();
         var xhr = new XMLHttpRequest();
         xhr.open("GET", "watchlistAjax.php", true);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("watchlist").innerHTML = xhr.responseText;
+                document.getElementById("watchlists").innerHTML = xhr.responseText;
             }
         };
         xhr.send();
-    }
+    };
 </script>
 
 </body>
