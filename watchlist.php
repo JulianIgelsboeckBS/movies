@@ -18,6 +18,20 @@ if (strlen($_SESSION['alogin']) == 0) {
     $status = $loginData->status;
 }
 ?>
+<?php
+$instance = new DbConn();
+$dbh = $instance->connect();
+$userId = $_SESSION['userId'];
+$sql = "select o.* from 
+offers o
+join watchlists w on o.id = w.offers_id
+join users u on u.id = w.user_id
+where u.id = :userId;";
+$query = $dbh->prepare($sql);
+$query->bindParam(':userId', $userId, PDO::PARAM_STR);
+$query->execute();
+$offers = $query->fetch(PDO::FETCH_OBJ);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,10 +58,11 @@ if (strlen($_SESSION['alogin']) == 0) {
 </head>
 
 
-<>
+<body>
 
 
 <div id="site-content">
+    <p class="watchlist"></p>
     <?php
     if ($status == 1 || $status == 2) {
         if ($status == 2) {
@@ -65,8 +80,8 @@ if (strlen($_SESSION['alogin']) == 0) {
         <div class="page">
             <div class="container">
                 <div class="row">
-                    <?php include __DIR__ . '/searchFilterCollaps.php'; ?>
-                    <?php include __DIR__ . '/slider.php'; ?>
+
+
 
                     <div class="row">
                         <?php if (isset($results)): ?>
@@ -96,8 +111,8 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
                                                             <strong>Providers:</strong> <?= $result['providers'] ?><br>
                                                             <?php if ($status == 1): ?>
-                                                                <button class="btn btn-light" id="watchlistButton" value="<?= $result['id'] ?>" onclick="watchlist()"><i
-                                                                            class="fa fa-heart"></i> Add to watchlist
+                                                                <button class="btn btn-light" value="<?= $result['id'] ?>"><i
+                                                                        class="fa fa-heart"></i> Add to watchlist
                                                                 </button>
 
                                                             <?php endif; ?>
@@ -118,48 +133,8 @@ if (strlen($_SESSION['alogin']) == 0) {
     <?php include __DIR__ . '/footer.php'; ?>
 </div>
 <!-- Default snippet for navigation -->
-<script src="js/owlCarousel.js"></script>
-<link href="css/owlCarousel.css" rel="stylesheet" type="text/css" media="all">
-<script>
-    $(document).ready(function () {
-        $("#owl-demo").owlCarousel({
 
-            autoPlay: 2000, //Set AutoPlay to 3 seconds
-            autoPlay: true,
-            navigation: false,
 
-            items: 5,
-            itemsDesktop: [640, 4],
-            itemsDesktopSmall: [414, 3]
-
-        });
-
-    });
-</script>
-<script>
-    function watchlistInput() {
-        var movieId = document.getElementById("watchlistButton").value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "get_watchlist.php?movie_id=" + movieId, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("watchlist").innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    }
-    function watchlist() {
-        var movieId = document.getElementById("watchlistButton").valueOf();
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "watchlistAjax.php", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("watchlist").innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    }
-</script>
 
 </body>
 

@@ -8,7 +8,7 @@ if(isset($_POST['login']))
     //$status='1';
     $email=$_POST['username'];
     $password=md5($_POST['password']);
-    $sql ="SELECT email, password FROM users WHERE email=:email and password= :password";
+    $sql ="SELECT email, password, id FROM users WHERE email=:email and password= :password";
     $query= $dbh-> prepare($sql);
     $query-> bindParam(':email', $email, PDO::PARAM_STR);
     $query-> bindParam(':password', $password, PDO::PARAM_STR);
@@ -20,6 +20,7 @@ if(isset($_POST['login']))
     {
         $_SESSION['alogin']=$_POST['username'];
         $_SESSION['status']=$loginData['status'];
+        $_SESSION['userId']=$loginData['id'];
         header('location:index.php');
         //echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
     } else{

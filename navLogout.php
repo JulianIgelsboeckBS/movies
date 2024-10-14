@@ -13,7 +13,7 @@
                 <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                 <ul class="menu">
                     <li class="menu-item current-menu-item"><a href="index.php">Home</a></li>                    
-                    <!-- <li class="menu-item"><a href="about.php">About</a></li> -->
+                    <li class="menu-item"><a href="watchlist.php">Watchlist</a></li>
                     <li class="menu-item"><a href="formSearch.php">Filmsuche</a></li>
                     <li class="menu-item"><a href="movie_details.php">Filmdetails</a></li>
                     <li class="menu-item"><a href="logout.php">Logout</a></li>
