@@ -5,22 +5,21 @@ if(isset($_POST['login']))
 {
     $instance= new DbConn();
     $dbh = $instance->connect();
-    //$status='1';
     $email=$_POST['username'];
     $password=md5($_POST['password']);
-    $sql ="SELECT email, password, id FROM users WHERE email=:email and password= :password";
+    $sql ="SELECT * FROM users WHERE email=:email and password= :password";
     $query= $dbh-> prepare($sql);
     $query-> bindParam(':email', $email, PDO::PARAM_STR);
     $query-> bindParam(':password', $password, PDO::PARAM_STR);
-    //$query-> bindParam(':status', $status, PDO::PARAM_STR);
     $query-> execute();
     $loginData=$query->fetch(PDO::FETCH_OBJ);
     
     if($loginData)
     {
         $_SESSION['alogin']=$_POST['username'];
-        $_SESSION['status']=$loginData->status;
         $_SESSION['userId']=$loginData->id;
+        $_SESSION['status']=$loginData->status;
+        
         header('location:index.php');
         //echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
     } else{

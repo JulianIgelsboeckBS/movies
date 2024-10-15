@@ -18,19 +18,20 @@ if (strlen($_SESSION['alogin']) == 0) {
     $status = $loginData->status;
 }
 
-// PHP program to pop an alert
-// message box on the screen
+$instance = new DbConn();
+$dbh = $instance->connect();
+$userId = $_SESSION['userId'];
+$sql = "select o.* from 
+offers o
+join watchlists w on o.id = w.offers_id
+join users u on u.id = w.user_id
+where u.id = :userId;";
+$query = $dbh->prepare($sql);
+$query->bindParam(':userId', $userId, PDO::PARAM_STR);
+$query->execute();
+$offers = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Function definition
-function function_alert($message) {
-    
-    // Display the alert box 
-    echo "<script>alert('$message');</script>";
-}
 
-
-// Function call
-function_alert($_SESSION['userId']);
 
 ?>
 
@@ -109,11 +110,28 @@ function_alert($_SESSION['userId']);
                                                             <br>
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
                                                             <strong>Providers:</strong> <?= $result['providers'] ?><br>
-                                                            <?php if ($status == 1): ?>
-                                                                <button class="watchlist-btn" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>"><i
-                                                                            class="fa fa-heart"></i>Add to Watchlist</button>
+                                                            <?php   
+                                                                $onList = false; // Initialize the variable
+                                                                $output = '';    // Initialize the output variable
+                                                                if ($status == 1): ?>
+                                                                    <?php foreach($offers as $offer): ?>
+                                                                        <?php 
+                                                                        if ($offer['id'] === $result['id']) {
+                                                                            $onList = true; // Set the flag directly
+                                                                            $output = "Remove from Watchlist";
+                                                                            break; // No need to continue looping once you found a match
+                                                                        } 
+                                                                        ?>
+                                                                    <?php endforeach; ?>
 
-                                                            <?php endif; ?>
+
+                                                                    <?php if ($onList): ?>
+                                                                        <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>"><?= $output ?></button>
+                                                                    <?php else: ?>
+                                                                        <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>">Add to Watchlist</button>
+                                                                    <?php endif; ?>
+                                                                <?php endif; ?>
+
                                                         </p>
                                                     </div>
                                                 </div>
@@ -187,11 +205,11 @@ function_alert($_SESSION['userId']);
             type: 'POST',
             data: { movie_id: movieId, action: action },
             success: function(response) {
-                if (response.success) {
+                if (response) {
                     if (action === 'add') {
-                        $('button[data-movie-id="' + movieId + '"]').text('Remove from Watchlist');
+                        $('button[data-movie-id="'+movieId+'"]').text('Remove from Watchlist');
                     } else {
-                        $('button[data-movie-id="' + movieId + '"]').text('Add to Watchlist');
+                        $('button[data-movie-id="'+movieId+'"]').text('Add to Watchlist');
                     }
                 }
             }

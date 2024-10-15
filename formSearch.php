@@ -33,7 +33,7 @@ else{
     <?php include __DIR__ . '/head.php'; ?>
 
 </head>
-<?php echo htmlentities($loginData->id);?>
+
 <?php print_r($_SESSION) ?>
 
 <body>

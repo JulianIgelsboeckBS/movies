@@ -23,23 +23,59 @@ class Movie extends DbConn
         }
     }
 
+    // Get all movies
+    public function fetchAllMovies()
+    {
+        $pdo = $this->connect();
+        $sql = "SELECT o.id, o.title, o.trailer, o.fsk, o.posterLink, 
+                       o.originalTitle, o.rating, o.description, 
+                       m.releaseYear, m.duration
+                FROM offers o 
+                JOIN movie m ON o.id = m.offers_id";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getAllMovies()
+    {
+        $pdo = $this->connect();
+        $sql = "SELECT o.id, o.title, o.description, o.rating,o.posterlink, m.releaseYear, p.name AS providers,p.id as providerId, g.name AS genre, g.id as genreId
+        FROM offers o
+        JOIN movie m ON o.id = m.offers_id
+        JOIN offersHasGenres og ON o.id = og.offers_id
+        JOIN genres g ON og.genres_id = g.id
+        JOIN offersHasProviders op ON o.id = op.offers_id
+        JOIN providers p ON op.provider_id = p.id
+        GROUP BY o.title;";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     // Fetch movie by ID from the database
     public function fetchMovieById($id)
     {
         $pdo = $this->pdo;
-        $sql = "SELECT o.id, o.title, o.trailer, o.fsk, o.posterLink, o.originalTitle, 
-                       o.rating, o.description, m.releaseYear, m.duration, m.offers_id
-                FROM offers o 
-                JOIN movie m ON o.id = m.offers_id
-                WHERE o.id = :id";
+        $sql = "SELECT o.id, o.title, o.description, o.rating,o.posterlink, m.releaseYear, p.name AS providers,p.id as providerId, g.name AS genre, g.id as genreId
+        FROM offers o
+        JOIN movie m ON o.id = m.offers_id
+        JOIN offersHasGenres og ON o.id = og.offers_id
+        JOIN genres g ON og.genres_id = g.id
+        JOIN offersHasProviders op ON o.id = op.offers_id
+        JOIN providers p ON op.provider_id = p.id
+        WHERE o.id = :id;";
 
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
-        $movie = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($movie) {
+        /* if ($movie) {
             $this->id = $movie['id'];
             $this->title = $movie['title'];
             $this->trailer = $movie['trailer'];
@@ -51,7 +87,7 @@ class Movie extends DbConn
             $this->releaseYear = $movie['releaseYear'];
             $this->duration = $movie['duration'];
             $this->offers_id = $movie['offers_id'];
-        }
+        } */
     }
 
     // Create a new movie record in the database
@@ -211,38 +247,7 @@ class Movie extends DbConn
 // Delete a movie by ID
 
 
-    // Get all movies
-    public function fetchAllMovies()
-    {
-        $pdo = $this->connect();
-        $sql = "SELECT o.id, o.title, o.trailer, o.fsk, o.posterLink, 
-                       o.originalTitle, o.rating, o.description, 
-                       m.releaseYear, m.duration
-                FROM offers o 
-                JOIN movie m ON o.id = m.offers_id";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    public function getAllMovies()
-    {
-        $pdo = $this->connect();
-        $sql = "SELECT o.id, o.title, o.description, o.rating,o.posterlink, m.releaseYear, p.name AS providers,p.id as providerId, g.name AS genre, g.id as genreId
-        FROM offers o
-        JOIN movie m ON o.id = m.offers_id
-        JOIN offersHasGenres og ON o.id = og.offers_id
-        JOIN genres g ON og.genres_id = g.id
-        JOIN offersHasProviders op ON o.id = op.offers_id
-        JOIN providers p ON op.provider_id = p.id
-        GROUP BY o.title;";
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    
 }
 
 

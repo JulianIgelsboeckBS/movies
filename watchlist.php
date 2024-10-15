@@ -30,7 +30,7 @@ where u.id = :userId;";
 $query = $dbh->prepare($sql);
 $query->bindParam(':userId', $userId, PDO::PARAM_STR);
 $query->execute();
-$offers = $query->fetch(PDO::FETCH_OBJ);
+$offers = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,10 +47,10 @@ $offers = $query->fetch(PDO::FETCH_OBJ);
     <script src="js/app.js"></script>
 
 
-    <title>Movie Review </title>
+    <title>Watchlist</title>
     <?php require_once("./models/movie.php");
-    $movie = new Movie();
-    $results = $movie->getAllMovies();
+    $movies = new Movie();
+    
     ?>
 
     <?php include __DIR__ . '/head.php'; ?>
@@ -84,15 +84,16 @@ $offers = $query->fetch(PDO::FETCH_OBJ);
 
 
                     <div class="row">
-                        <?php if (isset($results)): ?>
+                        <?php if (isset($offers)): ?>
                             <div class="search-results">
 
-                                <?php if (empty($results)): ?>
-                                    <p class="text-muted">No movies found.</p>
+                                <?php if (empty($offers)): ?>
+                                    <p class="text-muted">No movies in watchlist yet.</p>
                                 <?php else: ?>
                                     <div class="row">
-                                        <?php foreach ($results as $result): ?>
-                                            <div class="col-sm-6 col-md-3">
+                                        <?php foreach ($offers as $offer): 
+                                            $result = $movies->fetchMovieById($offer['id'])?>
+                                            <div class="col-sm-6 col-md-3" id="<?= $result['id']?>">
                                                 <div class="card mb-4 shadow-sm">
                                                     <img src="<?= $result['posterlink'] ?>"
                                                          class="card-img-top" alt="Movie 1">
@@ -111,9 +112,10 @@ $offers = $query->fetch(PDO::FETCH_OBJ);
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
                                                             <strong>Providers:</strong> <?= $result['providers'] ?><br>
                                                             <?php if ($status == 1): ?>
-                                                                <button class="btn btn-light" value="<?= $result['id'] ?>"><i
-                                                                        class="fa fa-heart"></i> Add to watchlist
-                                                                </button>
+                                                                <?php if ($status == 1): ?>
+                                                                <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>">Remove</button>
+
+                                                            <?php endif; ?>
 
                                                             <?php endif; ?>
                                                         </p>
@@ -133,7 +135,27 @@ $offers = $query->fetch(PDO::FETCH_OBJ);
     <?php include __DIR__ . '/footer.php'; ?>
 </div>
 <!-- Default snippet for navigation -->
+<script>$(document).ready(function() {
+    $('.watchlist-btn').click(function() {
+        var movieId = $(this).data('movie-id');
+        var action = $(this).text() === 'Add to Watchlist' ? 'add' : 'remove';
 
+        $.ajax({
+            url: 'watchlistAjax.php',
+            type: 'POST',
+            data: { movie_id: movieId, action: action },
+            success: function(response) {
+                if (response) {
+                    if (action === 'add') {
+                        $('div[id="'+movieId+'"]').hide();
+                    } else {
+                        $('div[id="'+movieId+'"]').hide();
+                    }
+                }
+            }
+        });
+    });
+});</script>
 
 
 </body>
