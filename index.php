@@ -17,7 +17,23 @@ if (strlen($_SESSION['alogin']) == 0) {
     $cnt = 1;
     $status = $loginData->status;
 }
+
+// PHP program to pop an alert
+// message box on the screen
+
+// Function definition
+function function_alert($message) {
+    
+    // Display the alert box 
+    echo "<script>alert('$message');</script>";
+}
+
+
+// Function call
+function_alert($_SESSION['userId']);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +47,7 @@ if (strlen($_SESSION['alogin']) == 0) {
     <script src="js/jquery-1.11.1.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/app.js"></script>
+    
 
 
     <title>Movie Review </title>
@@ -93,9 +110,8 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
                                                             <strong>Providers:</strong> <?= $result['providers'] ?><br>
                                                             <?php if ($status == 1): ?>
-                                                                <button class="btn btn-light" id="watchlistButton" value="<?= $result['id'] ?>" onclick="watchlist()" ><i
-                                                                            class="fa fa-heart"></i> Add to watchlist
-                                                                </button>
+                                                                <button class="watchlist-btn" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>"><i
+                                                                            class="fa fa-heart"></i>Add to Watchlist</button>
 
                                                             <?php endif; ?>
                                                         </p>
@@ -133,30 +149,55 @@ if (strlen($_SESSION['alogin']) == 0) {
 
     });
 </script>
-<script>
-    function watchlistInput() {
-        var movieId = document.getElementById("watchlistButton").value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "get_watchlist.php?movie_id=" + movieId, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("watchlists").innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    };
 
-    function watchlist() {
-        var movieId = document.getElementById("watchlistButton").valueOf();
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "watchlistAjax.php", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                document.getElementById("watchlists").innerHTML = xhr.responseText;
+<script>
+    // function watchlistInput() {
+    //     var movieId = document.getElementById("watchlistButton").value;
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open("GET", "get_watchlist.php?movie_id=" + movieId, true);
+    //     xhr.onreadystatechange = function () {
+    //         if (xhr.readyState === 4 && xhr.status === 200) {
+    //             document.getElementById("watchlists").innerHTML = xhr.responseText;
+    //         }
+    //     };
+    //     xhr.send();
+    // };
+
+    // function watchlist() {
+    //     var movieId = document.getElementById("watchlistButton").value;
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open("GET", "watchlistAjax.php", true);
+    //     xhr.onreadystatechange = function () {
+    //         if (xhr.readyState === 4 && xhr.status === 200) {
+    //             document.getElementById("watchlists").innerHTML = xhr.responseText;
+    //             document.getElementById("watchlistButton").innerHTML = "Remove"
+    //         }
+    //     };
+    //     xhr.send();
+    // };
+
+
+    $(document).ready(function() {
+    $('.watchlist-btn').click(function() {
+        var movieId = $(this).data('movie-id');
+        var action = $(this).text() === 'Add to Watchlist' ? 'add' : 'remove';
+
+        $.ajax({
+            url: 'watchlistAjax.php',
+            type: 'POST',
+            data: { movie_id: movieId, action: action },
+            success: function(response) {
+                if (response.success) {
+                    if (action === 'add') {
+                        $('button[data-movie-id="' + movieId + '"]').text('Remove from Watchlist');
+                    } else {
+                        $('button[data-movie-id="' + movieId + '"]').text('Add to Watchlist');
+                    }
+                }
             }
-        };
-        xhr.send();
-    };
+        });
+    });
+});
 </script>
 
 </body>

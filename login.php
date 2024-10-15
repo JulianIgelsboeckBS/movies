@@ -4,7 +4,7 @@ include('models/DbConn.php');
 if(isset($_POST['login']))
 {
     $instance= new DbConn();
-    $dbh = $instance->connectAdmin();
+    $dbh = $instance->connect();
     //$status='1';
     $email=$_POST['username'];
     $password=md5($_POST['password']);
@@ -14,13 +14,13 @@ if(isset($_POST['login']))
     $query-> bindParam(':password', $password, PDO::PARAM_STR);
     //$query-> bindParam(':status', $status, PDO::PARAM_STR);
     $query-> execute();
-    $loginData=$query->fetchAll(PDO::FETCH_OBJ);
+    $loginData=$query->fetch(PDO::FETCH_OBJ);
     
     if($loginData)
     {
         $_SESSION['alogin']=$_POST['username'];
-        $_SESSION['status']=$loginData['status'];
-        $_SESSION['userId']=$loginData['id'];
+        $_SESSION['status']=$loginData->status;
+        $_SESSION['userId']=$loginData->id;
         header('location:index.php');
         //echo "<script type='text/javascript'> document.location = 'index.php'; </script>";
     } else{
