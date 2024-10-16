@@ -104,13 +104,12 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                                             </a>
                                                         </h3>
                                                         <p class="card-text">
-                                                            <strong>Description:</strong> <?= $result['description'] ?>
-                                                            <br>
+                                                            
                                                             <strong>Genre:</strong> <?= $result['genre'] ?><br>
                                                             <strong>Release Year:</strong> <?= $result['releaseYear'] ?>
                                                             <br>
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
-                                                            <strong>Providers:</strong> <?= $result['providers'] ?><br>
+                                                            
                                                             <?php if ($status == 1): ?>
                                                                 <?php if ($status == 1): ?>
                                                                 <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>">Remove</button>

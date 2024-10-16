@@ -103,16 +103,10 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                                             </a>
                                                         </h3>
                                                         <p class="card-text">
-                                                            <strong>Description:</strong> <?= $result['description'] ?>
-                                                            <br>
+
                                                             <strong>Genre:</strong> <?= $result['genre'] ?><br>
-                                                            <strong>Release Year:</strong> <?= $result['releaseYear'] ?>
-                                                            <br>
+                                                            <strong>Release Year:</strong> <?= $result['releaseYear'] ?><br>
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
-                                                            <strong>Providers:</strong> <?= $result['providers'] ?><br>
-
-                                                                                                                                 
-
 
                                                                 <?php   
                                                                 $onList = false; // Initialize the variable
@@ -175,7 +169,7 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
 
 <script>
     $(document).ready(function() {
-    $('.movie-card-img').hover(function() {
+    $('.movie-card-img').dblclick(function() {
         var movieId = $(this).data('image-id'); // Get the movie ID from data attribute
 
         // Make an AJAX request to fetch movie details
