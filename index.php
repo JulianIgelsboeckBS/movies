@@ -95,7 +95,7 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                             <div class="col-sm-6 col-md-3">
                                                 <div class="card mb-4 shadow-sm">
                                                     <img src="<?= $result['posterlink'] ?>"
-                                                         class="card-img-top" alt="Movie 1">
+                                                    class="card-img-top movie-card-img" alt="Movie 1" data-image-id="<?= $result['id'] ?>">
                                                     <div class="card-body p-3">
                                                         <h3 class="card-title">
                                                             <a href="movie_details.php?id=<?= $result['id'] ?>">
@@ -110,7 +110,11 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                                             <br>
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
                                                             <strong>Providers:</strong> <?= $result['providers'] ?><br>
-                                                            <?php   
+
+                                                                                                                                 
+
+
+                                                                <?php   
                                                                 $onList = false; // Initialize the variable
                                                                 $output = '';    // Initialize the output variable
                                                                 if ($status == 1): ?>
@@ -131,6 +135,7 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                                                         <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>">Add to Watchlist</button>
                                                                     <?php endif; ?>
                                                                 <?php endif; ?>
+                                                                
 
                                                         </p>
                                                     </div>
@@ -168,6 +173,38 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+    $('.movie-card-img').hover(function() {
+        var movieId = $(this).data('image-id'); // Get the movie ID from data attribute
+
+        // Make an AJAX request to fetch movie details
+        $.ajax({
+            url: 'movieDetailsAjax.php',
+            type: 'POST',
+            data: { movie_id: movieId },
+            dataType: 'json',
+            success: function(data) {
+                // Populate modal or tooltip with the movie details
+                $('#movieModal .modal-title').text(data.title);
+                $('#movieModal .modal-body').html(`
+                    <p><strong>Description:</strong> ${data.description}</p>
+                    <p><strong>Genre:</strong> ${data.genre}</p>
+                    <p><strong>Release Year:</strong> ${data.releaseYear}</p>
+                    <p><strong>Rating:</strong> ${data.rating}</p>
+                    <p><strong>Providers:</strong> ${data.providers}</p>
+                `);
+                
+                // Show the modal (you can also use a custom popover if you don't want a modal)
+                $('#movieModal').modal('show');
+            },
+            error: function() {
+                alert('Failed to fetch movie details.');
+            }
+        });
+    });
+});
+</script>
 <script>
     // function watchlistInput() {
     //     var movieId = document.getElementById("watchlistButton").value;
@@ -217,6 +254,24 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
     });
 });
 </script>
+
+   <!-- Modal -->
+   <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="movieModalLabel">Movie Details</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <!-- Movie details will be loaded here by JavaScript -->
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                            </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        </div>
 
 </body>
 
