@@ -12,7 +12,7 @@
                 <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                 <ul class="menu">
                     <li class="menu-item current-menu-item"><a href="index.php">Home</a></li>
-                    <li class="menu-item current-menu-item"><a href="addMovie.php">Film erstellen</a></li>
+                    <li class="menu-item"><a href="addMovie.php">Film erstellen</a></li>
                     <li class="menu-item"><a href="cms_movies_list.php">Filmtabelle</a></li>
                     <li class="menu-item"><a href="logout.php">Logout</a></li>
                 </ul> <!-- .menu -->
@@ -28,3 +28,29 @@
         </nav>
     </div>
 </header>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    // Get the current URL path
+    const currentPath = window.location.pathname.substring(1);
+    
+    
+    // Select all menu items
+    const menuItems = document.querySelectorAll('.menu-item a');
+    
+        
+
+    // Loop through each menu item
+    menuItems.forEach(item => {
+        
+        // Check if the menu item href matches the current URL path
+        if (item.getAttribute('href') == currentPath) {
+            // Add the 'current-menu-item' class to the parent <li>
+            item.parentElement.classList.add('current-menu-item');
+        } else {
+            // Remove the 'current-menu-item' class from other items
+            item.parentElement.classList.remove('current-menu-item');
+        }
+    });
+});
+
+</script>

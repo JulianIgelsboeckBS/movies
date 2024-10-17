@@ -29,12 +29,12 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 
     <title>Search <?= $loginData->name;?></title>
-    <!-- Latest compiled and minified CSS -->
+    
     <?php include __DIR__ . '/head.php'; ?>
 
 </head>
 
-<?php print_r($_SESSION) ?>
+<?php //print_r($_SESSION) ?>
 
 <body>
 <div id="site-content">
