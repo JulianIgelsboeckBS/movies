@@ -1,4 +1,4 @@
-let endpoint = "http://localhost:5081/api/Genre";
+let endpoint = "http://localhost:5123/api/Genre";
 data = fetch(endpoint)
     .then(response => {
         if (!response.ok) {
