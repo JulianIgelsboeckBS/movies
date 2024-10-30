@@ -48,6 +48,8 @@ textarea {
 body {
   margin: 0; }
 
+  
+
 a {
   background: transparent; }
   a:focus {
@@ -131,6 +133,23 @@ sub {
 
 img {
   border: 0; }
+
+.card-img-wrapper {
+    width: 100%;
+    height: 385px; /* Adjust height as needed */
+    overflow: hidden;
+}
+.card-img-wrapper-slider {
+  width: 100%;
+  height: 270px; /* Adjust height as needed */
+  overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 svg:not(:root) {
   overflow: hidden; }
@@ -222,8 +241,9 @@ body {
   line-height: normal; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  margin: 0 0 20px; }
+  font-weight: 600;
+  margin: 0 0 15px;
+  color: #ffaa3c; }
 
 hr {
   border: none;

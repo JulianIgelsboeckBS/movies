@@ -2,7 +2,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-bs-toggle="collapse" href="#collapse1">Suchfilter anzeigen</a>
+                                        <a data-bs-toggle="collapse" href="#collapse1">Filter auswählen</a>
                                     </h4>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse">

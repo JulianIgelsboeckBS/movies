@@ -83,9 +83,9 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
         <div class="page">
             <div class="container">
                 <div class="row">
-                    <h1 class="text-center text-dark">Wer streamt es? Finde deine Lieblingsfilme</h1>
-                    <!-- <h2 class="text-center">Jetzt Filme entdecken und vergleichen</h2> -->
-                    <p id="watchlists"></p>
+                    <h1 class="text-center">"I have a Stream"</h1>
+                    <h3 class="text-center"> Martin Luther King</h3>
+                    <!-- <p id="watchlists"></p> -->
                     <?php include __DIR__ . '/searchFilterCollaps.php'; ?>
                     <?php include __DIR__ . '/slider.php'; ?>
 
@@ -100,9 +100,12 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                         <?php foreach ($results as $result): ?>
                                             <div class="col-sm-6 col-md-3">
                                                 <div class="card mb-4 shadow-sm">
-                                                    <img src="<?= $result['posterlink'] ?>" alt="<?= $result['title'] ?> Poster"
-                                                        title="<?= $result['title'] ?> Poster" class="card-img-top movie-card-img"
-                                                        data-image-id="<?= $result['id'] ?>">
+                                                    <div class="card-img-wrapper">
+                                                        <img src="<?= $result['posterlink'] ?>" alt="<?= $result['title'] ?> Poster"
+                                                            title="<?= $result['title'] ?> Poster"
+                                                            class="card-img-top"
+                                                            data-image-id="<?= $result['id'] ?>">
+                                                    </div>
                                                     <div class="card-body p-3">
                                                         <h3 class="card-title">
                                                             <a href="movie_details.php?id=<?= $result['id'] ?>">
