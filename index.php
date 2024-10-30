@@ -39,19 +39,22 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
 <html lang="en">
 
 <head>
+    <title>Filmbewertungen und Streaming-Anbieter finden - Wer streamt es? | Movie Review</title>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <meta name="description"
+        content="Finde heraus, welcher Anbieter deine Lieblingsfilme streamt. Durchstöbere Bewertungen, Watchlists und mehr. Dein Guide für Online-Streaming und Filmempfehlungen.">
+    <meta name="keywords" content="Filmbewertung, Streaming-Anbieter, Lieblingsfilme streamen, Watchlist, Filmgenres">
 
 
-    <script src="js/disableFilter.js"></script>
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/app.js"></script>
-    
 
 
-    <title>Movie Review </title>
+
+
+
+
     <?php require_once("./models/movie.php");
     $movie = new Movie();
     $results = $movie->getAllMovies();
@@ -75,10 +78,13 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
 
     ?>
 
+
     <main class="main-content">
         <div class="page">
             <div class="container">
                 <div class="row">
+                    <h1 class="text-center text-dark">Wer streamt es? Finde deine Lieblingsfilme</h1>
+                    <!-- <h2 class="text-center">Jetzt Filme entdecken und vergleichen</h2> -->
                     <p id="watchlists"></p>
                     <?php include __DIR__ . '/searchFilterCollaps.php'; ?>
                     <?php include __DIR__ . '/slider.php'; ?>
@@ -94,8 +100,9 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                         <?php foreach ($results as $result): ?>
                                             <div class="col-sm-6 col-md-3">
                                                 <div class="card mb-4 shadow-sm">
-                                                    <img src="<?= $result['posterlink'] ?>"
-                                                    class="card-img-top movie-card-img" alt="Movie 1" data-image-id="<?= $result['id'] ?>">
+                                                    <img src="<?= $result['posterlink'] ?>" alt="<?= $result['title'] ?> Poster"
+                                                        title="<?= $result['title'] ?> Poster" class="card-img-top movie-card-img"
+                                                        data-image-id="<?= $result['id'] ?>">
                                                     <div class="card-body p-3">
                                                         <h3 class="card-title">
                                                             <a href="movie_details.php?id=<?= $result['id'] ?>">
@@ -108,28 +115,32 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                                             <strong>Release Year:</strong> <?= $result['releaseYear'] ?><br>
                                                             <strong>Rating:</strong> <?= $result['rating'] ?><br>
 
-                                                                <?php   
-                                                                $onList = false; // Initialize the variable
-                                                                $output = '';    // Initialize the output variable
-                                                                if ($status == 1): ?>
-                                                                    <?php foreach($offers as $offer): ?>
-                                                                        <?php 
-                                                                        if ($offer['id'] === $result['id']) {
-                                                                            $onList = true; // Set the flag directly
-                                                                            $output = "Remove from Watchlist";
-                                                                            break; // No need to continue looping once you found a match
-                                                                        } 
-                                                                        ?>
-                                                                    <?php endforeach; ?>
+                                                            <?php
+                                                            $onList = false; // Initialize the variable
+                                                            $output = '';    // Initialize the output variable
+                                                            if ($status == 1): ?>
+                                                                <?php foreach ($offers as $offer): ?>
+                                                                    <?php
+                                                                    if ($offer['id'] === $result['id']) {
+                                                                        $onList = true; // Set the flag directly
+                                                                        $output = "Remove from Watchlist";
+                                                                        break; // No need to continue looping once you found a match
+                                                                    }
+                                                                    ?>
+                                                                <?php endforeach; ?>
 
 
-                                                                    <?php if ($onList): ?>
-                                                                        <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>"><?= $output ?></button>
-                                                                    <?php else: ?>
-                                                                        <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>" value="<?= $result['id'] ?>">Add to Watchlist</button>
-                                                                    <?php endif; ?>
+                                                                <?php if ($onList): ?>
+                                                                    <button class="watchlist-btn btn btn-warning btn-sm"
+                                                                        data-movie-id="<?= $result['id'] ?>"
+                                                                        value="<?= $result['id'] ?>"><?= $output ?></button>
+                                                                <?php else: ?>
+                                                                    <button class="watchlist-btn btn btn-warning btn-sm"
+                                                                        data-movie-id="<?= $result['id'] ?>"
+                                                                        value="<?= $result['id'] ?>">Add to Watchlist</button>
                                                                 <?php endif; ?>
-                                                                
+                                                            <?php endif; ?>
+
 
                                                         </p>
                                                     </div>
@@ -148,8 +159,17 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
     <?php include __DIR__ . '/footer.php'; ?>
 </div>
 <!-- Default snippet for navigation -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="js/disableFilter.js"></script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/app.js"></script>
 <script src="js/owlCarousel.js"></script>
-<link href="css/owlCarousel.css" rel="stylesheet" type="text/css" media="all">
+<!-- <link href="css/owlCarousel.css" rel="stylesheet" type="text/css" media="all"> -->
 <script>
     $(document).ready(function () {
         $("#owl-demo").owlCarousel({
@@ -168,36 +188,36 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
 </script>
 
 <script>
-    $(document).ready(function() {
-    $('.movie-card-img').dblclick(function() {
-        var movieId = $(this).data('image-id'); // Get the movie ID from data attribute
+    $(document).ready(function () {
+        $('.movie-card-img').dblclick(function () {
+            var movieId = $(this).data('image-id'); // Get the movie ID from data attribute
 
-        // Make an AJAX request to fetch movie details
-        $.ajax({
-            url: 'movieDetailsAjax.php',
-            type: 'POST',
-            data: { movie_id: movieId },
-            dataType: 'json',
-            success: function(data) {
-                // Populate modal or tooltip with the movie details
-                $('#movieModal .modal-title').text(data.title);
-                $('#movieModal .modal-body').html(`
+            // Make an AJAX request to fetch movie details
+            $.ajax({
+                url: 'movieDetailsAjax.php',
+                type: 'POST',
+                data: { movie_id: movieId },
+                dataType: 'json',
+                success: function (data) {
+                    // Populate modal or tooltip with the movie details
+                    $('#movieModal .modal-title').text(data.title);
+                    $('#movieModal .modal-body').html(`
                     <p><strong>Description:</strong> ${data.description}</p>
                     <p><strong>Genre:</strong> ${data.genre}</p>
                     <p><strong>Release Year:</strong> ${data.releaseYear}</p>
                     <p><strong>Rating:</strong> ${data.rating}</p>
                     <p><strong>Providers:</strong> ${data.providers}</p>
                 `);
-                
-                // Show the modal (you can also use a custom popover if you don't want a modal)
-                $('#movieModal').modal('show');
-            },
-            error: function() {
-                alert('Failed to fetch movie details.');
-            }
+
+                    // Show the modal (you can also use a custom popover if you don't want a modal)
+                    $('#movieModal').modal('show');
+                },
+                error: function () {
+                    alert('Failed to fetch movie details.');
+                }
+            });
         });
     });
-});
 </script>
 <script>
     // function watchlistInput() {
@@ -226,46 +246,46 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
     // };
 
 
-    $(document).ready(function() {
-    $('.watchlist-btn').click(function() {
-        var movieId = $(this).data('movie-id');
-        var action = $(this).text() === 'Add to Watchlist' ? 'add' : 'remove';
+    $(document).ready(function () {
+        $('.watchlist-btn').click(function () {
+            var movieId = $(this).data('movie-id');
+            var action = $(this).text() === 'Add to Watchlist' ? 'add' : 'remove';
 
-        $.ajax({
-            url: 'watchlistAjax.php',
-            type: 'POST',
-            data: { movie_id: movieId, action: action },
-            success: function(response) {
-                if (response) {
-                    if (action === 'add') {
-                        $('button[data-movie-id="'+movieId+'"]').text('Remove from Watchlist');
-                    } else {
-                        $('button[data-movie-id="'+movieId+'"]').text('Add to Watchlist');
+            $.ajax({
+                url: 'watchlistAjax.php',
+                type: 'POST',
+                data: { movie_id: movieId, action: action },
+                success: function (response) {
+                    if (response) {
+                        if (action === 'add') {
+                            $('button[data-movie-id="' + movieId + '"]').text('Remove from Watchlist');
+                        } else {
+                            $('button[data-movie-id="' + movieId + '"]').text('Add to Watchlist');
+                        }
                     }
                 }
-            }
+            });
         });
     });
-});
 </script>
 
-   <!-- Modal -->
-   <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog">
-                                                                            <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="movieModalLabel">Movie Details</h5>
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <!-- Movie details will be loaded here by JavaScript -->
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                                            </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        </div>
+<!-- Modal -->
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="movieModalLabel">Movie Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Movie details will be loaded here by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 

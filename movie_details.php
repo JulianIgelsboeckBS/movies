@@ -61,6 +61,10 @@ if ($movieId) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <meta name="description"
+        content="Alle nötigen Informationen zu deinem Lieblingsfilm, findest du auf dieser Seite">
+    <meta name="keywords" content="Filmdetails, Infos, Filme, Filmbewertung, Filmgenres">
+
 
     <title>Movie Review | <?= htmlspecialchars($movie['title']) ?></title>
     <?php include __DIR__ . '/head.php'; ?>
@@ -88,6 +92,7 @@ if ($movieId) {
                         <a href="review.php">Movie Review</a>
                         <span><?= htmlspecialchars($movie['title']) ?></span>
                     </div>
+                    <h1>Details</h1>
 
                     <div class="content">
                         <div class="row">

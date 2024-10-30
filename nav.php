@@ -2,7 +2,7 @@
 <header class="site-header">
     <div class="container">
         <a href="index.php" id="branding">
-            <img src="images/streamer1.png" alt="" class="logo">
+            <img src="images/streamer1.png" alt="streamerLogo" class="logo">
             <!--<div class="logo-copy">
                 <h1 class="site-title">Streamer</h1>
                 <small class="site-description">Follow your Streams</small>
@@ -10,7 +10,7 @@
         </a> <!-- #branding -->
         <nav>
             <div class="main-navigation">
-                <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
+                <button type="button" class="menu-toggle" id="menu-toggle"><i class="fa fa-bars"></i></button>
                 <ul class="menu">
                     <li class="menu-item"><a href="index.php">Home</a></li>                    
                     <!-- <li class="menu-item"><a href="about.php">About</a></li> -->
@@ -21,11 +21,11 @@
                     <li class="menu-item"><a href="login.php">Login</a></li>
                 </ul> <!-- .menu -->
 
-                <form action="#" class="search-form">
-                    <input type="text" placeholder="Search..." id="searchfield" >
-                    <button><i class="fa fa-search"></i></button>
+                 <div class="search-form">
+                    <input type="text" placeholder="Search..." id="searchfield"  >
+                    <button><i class="fa fa-search" id="searchForm" name="searchfield" ></i></button>
                     <!-- <button class="btn" id="disableFilter">Filter ausblenden</button> -->
-                </form>
+                 </div>
             </div> <!-- .main-navigation -->
 
             <div class="mobile-navigation"></div>
