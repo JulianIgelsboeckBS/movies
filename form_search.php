@@ -22,15 +22,14 @@ $searchQuery = "";
 $results = [];
 
 // If the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $selectedGenre = $_POST['genre'];
     $selectedReleaseYear = $_POST['releaseYear'];
     $selectedRating = $_POST['rating'];
     $selectedProvider = $_POST['provider'];
 
     $searchQuery = "
-        SELECT o.id, o.title, o.description, o.rating, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers, g.name AS genre
+        SELECT o.id, o.title, o.description, o.posterlink, o.rating, m.releaseYear, GROUP_CONCAT(p.name SEPARATOR ', ') AS providers, g.name AS genre
         FROM offers o
         JOIN movie m ON o.id = m.offers_id
         JOIN offersHasGenres og ON o.id = og.offers_id
@@ -40,8 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         WHERE 1=1";  // Ensures the WHERE clause always has a base condition
 
     // Add conditions dynamically based on user input
-    if ($selectedGenre !== 'all')
-    {
+    if ($selectedGenre !== 'all') {
         $searchQuery .= " AND g.name = :genre";
     }
 
@@ -55,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $searchQuery .= " AND p.name = :provider";
     }
 
-// Group by movie title to avoid duplicates, while concatenating providers
+    // Group by movie title to avoid duplicates, while concatenating providers
     $searchQuery .= " GROUP BY o.title";
 
-// Prepare and bind parameters
+    // Prepare and bind parameters
     $stmt = $pdo->prepare($searchQuery);
     if ($selectedGenre !== 'all') {
         $stmt->bindParam(':genre', $selectedGenre);
@@ -73,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $stmt->bindParam(':provider', $selectedProvider);
     }
 
-// Execute the query
+    // Execute the query
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -129,37 +127,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <button type="submit" class="btn btn-warning mt-4">Search</button>
 </form>
 
-<!-- Display Search Results with Bootstrap Styling -->
-<?php if (isset($results)): ?>
-    <div class="search-results">
-        <h2>Search Results:</h2>
-        <?php if (empty($results)): ?>
-            <p class="text-muted">No results found.</p>
-        <?php else: ?>
-            <div class="row">
-                <?php foreach ($results as $result): ?>
-                    <div class="col-sm-6 col-md-3">
-                        <div class="card mb-4 shadow-sm">
-                            <img src="dummy/thumb-1.jpg" class="card-img-top" alt="Movie 1">
-                            <div class="card-body p-3">
-                                <h5 class="card-title">
-                                    <a href="movie_details.php?id=<?= $result['id'] ?>">
-                                        <?= $result['title'] ?>
-                                    </a>
-                                </h5>
-                                <p class="card-text">
-                                    <strong>Description:</strong> <?= $result['description'] ?><br>
-                                    <strong>Genre:</strong> <?= $result['genre'] ?><br>
-                                    <strong>Release Year:</strong> <?= $result['releaseYear'] ?><br>
-                                    <strong>Rating:</strong> <?= $result['rating'] ?><br>
-                                    <strong>Providers:</strong> <?= $result['providers'] ?>
-                                </p>
+
+<div class="row">
+    <?php if (isset($results)): ?>
+        <div class="search-results">
+
+            <?php if (empty($results)): ?>
+                <p class="text">No movies found.</p>
+
+
+            <?php else: ?>
+                <div class="row">
+                    <?php foreach ($results as $result): ?>
+                        <div class="col-sm-6 col-md-3">
+                            <div class="card mb-4 shadow-sm">
+                                <div class="card-img-wrapper">
+                                    <img src="<?= $result['posterlink'] ?>" alt="<?= $result['title'] ?> Poster"
+                                        title="<?= $result['title'] ?> Poster" class="card-img-top"
+                                        data-image-id="<?= $result['id'] ?>">
+                                </div>
+                                <div class="card-body p-3">
+                                    <h3 class="card-title">
+                                        <a href="movie_details.php?id=<?= $result['id'] ?>">
+                                            <?= $result['title'] ?>
+                                        </a>
+                                    </h3>
+                                    <p class="card-text">
+
+                                        <strong>Genre:</strong> <?= $result['genre'] ?><br>
+                                        <strong>Release Year:</strong> <?= $result['releaseYear'] ?><br>
+                                        <strong>Rating:</strong> <?= $result['rating'] ?><br>
+
+                                        <?php
+                                        $onList = false; // Initialize the variable
+                                        $output = '';    // Initialize the output variable
+                                        if ($status == 1): ?>
+                                            <?php foreach ($offers as $offer): ?>
+                                                <?php
+                                                if ($offer['id'] === $result['id']) {
+                                                    $onList = true; // Set the flag directly
+                                                    $output = "Remove from Watchlist";
+                                                    break; // No need to continue looping once you found a match
+                                                }
+                                                ?>
+                                            <?php endforeach; ?>
+
+
+                                            <?php if ($onList): ?>
+                                                <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>"
+                                                    value="<?= $result['id'] ?>"><?= $output ?></button>
+                                            <?php else: ?>
+                                                <button class="watchlist-btn btn btn-warning btn-sm" data-movie-id="<?= $result['id'] ?>"
+                                                    value="<?= $result['id'] ?>">Add to Watchlist</button>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+
+
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
         <?php endif; ?>
     </div>
-<?php endif; ?>
-
+</div>

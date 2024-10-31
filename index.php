@@ -83,10 +83,10 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
         <div class="page">
             <div class="container">
                 <div class="row">
-                    <h1 class="text-center">"I have a Stream"</h1>
-                    <h3 class="text-center"> Martin Luther King</h3>
+                    <h1 class="text-center">Filme</h1>
+                    
                     <!-- <p id="watchlists"></p> -->
-                    <?php include __DIR__ . '/searchFilterCollaps.php'; ?>
+                    <?php //include __DIR__ . '/searchFilterCollaps.php'; ?> 
                     <?php include __DIR__ . '/slider.php'; ?>
 
                     <div class="row">
