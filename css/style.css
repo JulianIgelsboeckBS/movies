@@ -192,6 +192,7 @@ button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
+  appearance: button;
   -webkit-appearance: button;
   cursor: pointer; }
 
@@ -206,6 +207,7 @@ input[type="radio"] {
   padding: 0; }
 
 input[type="search"] {
+  appearance: textfield;
   -webkit-appearance: textfield;
   -moz-box-sizing: content-box;
   box-sizing: content-box; }
@@ -235,7 +237,7 @@ table {
  */
 body {
   background-color: black;
-  //background-image: url(dummy/background.jpg);
+  background-image: url(dummy/background.jpg);
   background-position: top center;
   background-repeat: no-repeat;
   color: #84878d;
@@ -300,7 +302,7 @@ form textarea {
   margin-bottom: 30px; }
   .slider .slides {
     list-style: none;
-    *zoom: 1; }
+    zoom: 1; }
     .slider .slides:after {
       content: " ";
       clear: both;
@@ -505,7 +507,7 @@ ul.arrow {
 
 .contact-form {
   margin-bottom: 30px;
-  *zoom: 1; }
+  zoom: 1; }
   .contact-form:after {
     content: " ";
     clear: both;
@@ -561,7 +563,7 @@ ul.arrow {
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-  *zoom: 1; }
+  zoom: 1; }
   .container:after {
     content: " ";
     clear: both;
@@ -583,7 +585,7 @@ ul.arrow {
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-  *zoom: 1; }
+  zoom: 1; }
   .container-fluid:after {
     content: " ";
     clear: both;
@@ -594,7 +596,7 @@ ul.arrow {
 .row {
   margin-left: -15px;
   margin-right: -15px;
-  *zoom: 1; }
+  zoom: 1; }
   .row:after {
     content: " ";
     clear: both;
@@ -1405,7 +1407,7 @@ ul.arrow {
  */
 .site-header {
   padding: 50px 0;
-  *zoom: 1; }
+  zoom: 1; }
   .site-header:after {
     content: " ";
     clear: both;
@@ -1698,15 +1700,19 @@ ul.arrow {
  * Footer Styles
  */
 .site-footer {
-  padding: 50px 0; }
+  padding: 50px 0;
+  }
+  .site-footer li {
+    color:#84878d
+  }
   .site-footer .widget {
     margin-bottom: 30px; }
   .site-footer .widget-title {
-    color: #bec1c8;
+    color: #84878d;
     font-weight: 300; }
   .site-footer .subscribe-form input[type="text"] {
     width: 100%;
-    border: 1px solid #bec1c8;
+    border: 1px solid #ecebe9;
     background-color: transparent;
     background-image: url(../images/arrow.png);
     background-repeat: no-repeat;

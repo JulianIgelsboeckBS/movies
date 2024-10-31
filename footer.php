@@ -3,19 +3,18 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="widget">
-                    <h3 class="widget-title">About Us</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia tempore vitae mollitia
-                        nesciunt saepe cupiditate</p>
+                    <h3 class="widget-title" ><a href="register.php">Registrieren</a></h3>
+                    <ul class="no-bullet">
+                        <li>Registriere dich um Zugriff zu besonderen Features zu erhalten</li>
+                    </ul>
+                    
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="widget">
-                    <h3 class="widget-title">Recent Review</h3>
+                    <h3 class="widget-title" ><a href="watchlist.php">Watchlist</a></h3>
                     <ul class="no-bullet">
-                        <li>Lorem ipsum dolor</li>
-                        <li>Sit amet consecture</li>
-                        <li>Dolorem respequem</li>
-                        <li>Invenore veritae</li>
+                        <li>Sie dir an welche Filme bereits auf deiner Watchlist sind</li>
                     </ul>
                 </div>
             </div>
@@ -33,7 +32,7 @@
             </div>
             <div class="col-md-2">
                 <div class="widget">
-                    <h3 class="widget-title">Newsletter</h3>
+                    <h3 class="widget-title" >Newsletter</h3>
                     <form action="#" class="subscribe-form">
                         <input type="text" placeholder="Email Address">
                     </form>
@@ -41,7 +40,7 @@
             </div>
         </div> <!-- .row -->
 
-        <div class="colophon">Copyright 2024 Streamer, Designed by Me. All rights reserved</div>
+        <div class="colophon">Copyright 2024 Streamer. All rights reserved</div>
     </div> <!-- .container -->
 
 </footer>

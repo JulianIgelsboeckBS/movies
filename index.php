@@ -83,7 +83,7 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
         <div class="page">
             <div class="container">
                 <div class="row">
-                    <h1 class="text-center">Filme</h1>
+                    <h1 class="text-center">Entdecke die neuesten Filme</h1>
                     
                     <!-- <p id="watchlists"></p> -->
                     <?php //include __DIR__ . '/searchFilterCollaps.php'; ?> 

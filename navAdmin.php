@@ -14,6 +14,8 @@
                     <li class="menu-item current-menu-item"><a href="index.php">Home</a></li>
                     <li class="menu-item"><a href="addMovie.php">Film erstellen</a></li>
                     <li class="menu-item"><a href="cms_movies_list.php">Filmtabelle</a></li>
+                    <li class="menu-item"><a href="apiCrudGenre.php">Manage Genre</a></li>
+                    <li class="menu-item"><a href="apiCrudProvider.php">Manage Provider</a></li>
                     <li class="menu-item"><a href="logout.php">Logout</a></li>
                 </ul> <!-- .menu -->
 
