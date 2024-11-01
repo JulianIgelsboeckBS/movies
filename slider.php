@@ -1,3 +1,4 @@
+
 <?php require_once("models/movie.php");
 $movie = new Movie();
 $results = $movie->getAllMovies();
@@ -51,5 +52,10 @@ $results = $movie->getAllMovies();
 
 
 </div>
+
+<script src="js/plugins.js"></script>
+<script src="js/owlCarousel.js"></script>
+
+
 
 

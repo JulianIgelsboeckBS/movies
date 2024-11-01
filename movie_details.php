@@ -3,21 +3,19 @@ session_start();
 error_reporting(0);
 include('./models/DbConn.php');
 
-if(strlen($_SESSION['alogin'])==0)
-{
+if (strlen($_SESSION['alogin']) == 0) {
     // header('location:index.php');
-}
-else{
-    $instance= new DbConn();
+} else {
+    $instance = new DbConn();
     $dbh = $instance->connect();
     $email = $_SESSION['alogin'];
     $sql = "SELECT * from users where email = (:email);";
-    $query = $dbh -> prepare($sql);
-    $query-> bindParam(':email', $email, PDO::PARAM_STR);
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':email', $email, PDO::PARAM_STR);
     $query->execute();
-    $loginData=$query->fetch(PDO::FETCH_OBJ);
-    $cnt=1;
-    $status=$loginData->status;
+    $loginData = $query->fetch(PDO::FETCH_OBJ);
+    $cnt = 1;
+    $status = $loginData->status;
 }
 
 
@@ -26,7 +24,7 @@ $movieId = $_GET['id'] ?? null;
 
 if ($movieId) {
 
-     function getMovieById($id)
+    function getMovieById($id)
     {
         $db = new DbConn;
         $pdo = $db->connect();
@@ -61,8 +59,7 @@ if ($movieId) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-    <meta name="description"
-        content="Alle nötigen Informationen zu deinem Lieblingsfilm, findest du auf dieser Seite">
+    <meta name="description" content="Alle nötigen Informationen zu deinem Lieblingsfilm, findest du auf dieser Seite">
     <meta name="keywords" content="Filmdetails, Infos, Filme, Filmbewertung, Filmgenres">
 
 
@@ -73,14 +70,15 @@ if ($movieId) {
 <body>
     <div id="site-content">
         <?php
-        if($status == 1 || $status == 2)
-        {
-            if($status == 2){ include __DIR__ . '/navAdmin.php';}
-            else{ include __DIR__ . '/navLogout.php';}
+        if ($status == 1 || $status == 2) {
+            if ($status == 2) {
+                include __DIR__ . '/navAdmin.php';
+            } else {
+                include __DIR__ . '/navLogout.php';
+            }
+        } else {
+            include __DIR__ . '/nav.php';
         }
-
-        else
-        {include __DIR__ . '/nav.php';}
 
         ?>
 
@@ -97,7 +95,8 @@ if ($movieId) {
                     <div class="content">
                         <div class="row">
                             <div class="col-md-6">
-                                <figure class="movie-poster"><img src="<?= htmlspecialchars($movie['posterlink']) ?>" alt="#"></figure>
+                                <figure class="movie-poster"><img src="<?= htmlspecialchars($movie['posterlink']) ?>"
+                                        alt="#"></figure>
                             </div>
                             <div class="col-md-6">
                                 <h2 class="movie-title"><?= htmlspecialchars($movie['title']) ?></h2>
@@ -106,20 +105,40 @@ if ($movieId) {
                                 </div>
                                 <ul class="movie-meta">
                                     <li><strong>Rating:</strong>
-                                        <div class="star-rating" title="Rated <?= htmlspecialchars($movie['rating']) ?> out of 10">
+                                        <div class="star-rating"
+                                            title="Rated <?= htmlspecialchars($movie['rating']) ?> out of 10">
                                             <span style="width:<?= htmlspecialchars($movie['rating']) * 20 ?>%">
-                                                <strong class="rating"><?= htmlspecialchars($movie['rating']) ?></strong> out of 10
+                                                <strong
+                                                    class="rating"><?= htmlspecialchars($movie['rating']) ?></strong>
+                                                out of 10
                                             </span>
                                         </div>
                                     </li>
                                     <li><strong>Length:</strong> <?= htmlspecialchars($movie['duration']) ?> min</li>
                                     <li><strong>Premiere:</strong> <?= htmlspecialchars($movie['releaseYear']) ?></li>
                                     <li><strong>Category:</strong> <?= htmlspecialchars($movie['genre']) ?></li>
+                                    </li>
+                                    <li><strong>Anbieter:</strong> <?= htmlspecialchars($movie['provider']) ?>
+                                    </li>
+                                    <div class="d-flex flex-row mt-3">
+                                            <div>
+                                                <figure class="provider-image"><img
+                                                        src="https://www.justwatch.com/images/icon/207360008/s100/netflix.{format}"
+                                                        alt="ProviderImage">
+                                                </figure>
+                                            </div>
+                                            <div >
+                                                <figure class="provider-image"><img
+                                                        src="https://www.justwatch.com/images/icon/52449539/s100/amazonprime.{format}"
+                                                        alt="ProviderImage">
+                                                </figure>
+                                            </div>
+                                        </div>
                                 </ul>
 
                                 <!--<ul class="starring">
-                                    <li><strong>Directors:</strong> <?php /*= htmlspecialchars($movie['director']) */?></li>
-                                    <li><strong>Stars:</strong> <?php /*= htmlspecialchars($movie['actor']) */?></li>
+                                    <li><strong>Directors:</strong> <?php /*= htmlspecialchars($movie['director']) */ ?></li>
+                                    <li><strong>Stars:</strong> <?php /*= htmlspecialchars($movie['actor']) */ ?></li>
                                 </ul>-->
                             </div>
                         </div>
