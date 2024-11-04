@@ -82,11 +82,11 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
     <main class="main-content">
         <div class="page">
             <div class="container">
-                <div class="row">
+                
                     <h1 class="text-center">Entdecke die neuesten Filme</h1>
-                    
+
                     <!-- <p id="watchlists"></p> -->
-                    <?php //include __DIR__ . '/searchFilterCollaps.php'; ?> 
+                    <?php //include __DIR__ . '/searchFilterCollaps.php'; ?>
                     <?php include __DIR__ . '/slider.php'; ?>
 
                     <div class="row">
@@ -102,8 +102,7 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
                                                 <div class="card mb-4 shadow-sm">
                                                     <div class="card-img-wrapper">
                                                         <img src="<?= $result['posterlink'] ?>" alt="<?= $result['title'] ?> Poster"
-                                                            title="<?= $result['title'] ?> Poster"
-                                                            class="card-img-top"
+                                                            title="<?= $result['title'] ?> Poster" class="card-img-top"
                                                             data-image-id="<?= $result['id'] ?>">
                                                     </div>
                                                     <div class="card-body p-3">
@@ -157,7 +156,8 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
                     </div>
-                </div> <!-- .container -->
+                
+            </div> <!-- .container -->
     </main>
     <?php include __DIR__ . '/footer.php'; ?>
 </div>
