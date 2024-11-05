@@ -354,7 +354,16 @@ form textarea {
     display: block;
     height: auto; }
 
-.provider-image {
+.provider-image-detail {
+  width: 100px;
+  height: 100px;
+  border-radius: 20%;
+  border: #c0c0c0;
+  overflow: hidden;
+   }
+  
+
+.provider-image{
   width: 100px;
   height: 100px;
   border-radius: 20%;
@@ -1691,7 +1700,7 @@ ul.arrow {
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: #e7e7e7;
+    /* background: #e7e7e7; */
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
     line-height: 2.6;
     color: #84878d;

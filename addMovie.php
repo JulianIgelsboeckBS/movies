@@ -78,9 +78,9 @@ $providers = $pdo->query($providerQuery)->fetchAll(PDO::FETCH_ASSOC);
 
                 <?php include __DIR__ . '/models/movie.php';
                 $instance = new Movie();
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $movieData = $instance->createMovie($_POST);
-                }
+                if ($_SERVER['REQUEST_METHOD'] === 'POST')
+                $movieData = $instance->createMovie($_POST);
+                
 
                 ?>
                 <!-- <div class="container mt-5"> -->

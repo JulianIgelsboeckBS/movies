@@ -28,7 +28,7 @@ if ($movieId) {
     {
         $db = new DbConn;
         $pdo = $db->connect();
-        $sql = "SELECT  o.title, o.description, o.rating, o.posterlink,m.duration, m.releaseYear, p.name AS provider, g.name AS genre
+        $sql = "SELECT  o.title, o.description, o.rating, o.posterlink,m.duration, m.releaseYear, p.name AS provider, p.logo as providerlogo, p.affiliateLink, g.name AS genre
                 FROM offers o
                 JOIN movie m ON o.id = m.offers_id
                 JOIN offersHasGenres og ON o.id = og.offers_id
@@ -42,6 +42,9 @@ if ($movieId) {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     $movie = getMovieById($movieId);
+    if ($movie == null) {
+        header('Location: index.php');
+    }
 
 } else {
     // Redirect or show error if no ID is provided
@@ -87,10 +90,13 @@ if ($movieId) {
                 <div class="page">
                     <div class="breadcrumbs">
                         <a href="index.php">Home</a>
-                        <a href="review.php">Movie Review</a>
+
                         <span><?= htmlspecialchars($movie['title']) ?></span>
                     </div>
                     <h1>Details</h1>
+
+                    
+
 
                     <div class="content">
                         <div class="row">
@@ -117,23 +123,29 @@ if ($movieId) {
                                     <li><strong>Length:</strong> <?= htmlspecialchars($movie['duration']) ?> min</li>
                                     <li><strong>Premiere:</strong> <?= htmlspecialchars($movie['releaseYear']) ?></li>
                                     <li><strong>Category:</strong> <?= htmlspecialchars($movie['genre']) ?></li>
-                                    </li>
+
                                     <li><strong>Anbieter:</strong> <?= htmlspecialchars($movie['provider']) ?>
-                                    </li>
-                                    <div class="d-flex flex-row mt-3">
-                                            <div>
+                                        <br>
+                                        <div class="d-flex flex-row mt-3">
+                                            <!-- <div>
                                                 <figure class="provider-image"><img
                                                         src="https://www.justwatch.com/images/icon/207360008/s100/netflix.{format}"
                                                         alt="ProviderImage">
                                                 </figure>
-                                            </div>
-                                            <div >
-                                                <figure class="provider-image"><img
-                                                        src="https://www.justwatch.com/images/icon/52449539/s100/amazonprime.{format}"
-                                                        alt="ProviderImage">
-                                                </figure>
+                                            </div> -->
+                                            <div>
+                                                <a href="<?= htmlspecialchars($movie['affiliateLink']) ?>"
+                                                    target="_blank">
+                                                    <figure class="provider-image-detail"><img
+                                                            src="<?= htmlspecialchars($movie['providerlogo']) ?>"
+                                                            alt="<?= htmlspecialchars($movie['provider']) ?>-Image">
+                                                    </figure>
+                                                </a>
+
                                             </div>
                                         </div>
+                                    </li>
+
                                 </ul>
 
                                 <!--<ul class="starring">
@@ -142,13 +154,23 @@ if ($movieId) {
                                 </ul>-->
                             </div>
                         </div>
+                        <div class="pagination d-flex justify-content-between">
+                        <a href="movie_details.php?id=<?= $movieId - 1 ?>" class="page-number prev"><i
+                                class="fa fa-angle-left"></i></a>
+
+                        <a href="movie_details.php?id=<?= $movieId + 1 ?>" class="page-number next"><i
+                                class="fa fa-angle-right"></i></a>
+                    </div>
                         <div class="entry-content">
+
                             <!-- Additional description or content can go here -->
                         </div>
                     </div>
                 </div>
             </div>
+
         </main>
+
 
         <?php include __DIR__ . '/footer.php'; ?>
     </div>

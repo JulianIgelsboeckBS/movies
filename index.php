@@ -35,6 +35,7 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -133,11 +134,11 @@ $offers = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
                                                                 <?php if ($onList): ?>
-                                                                    <button class="watchlist-btn btn btn-warning btn-sm"
+                                                                    <button class="watchlist-btn btn btn-warning btn-sm mt-1"
                                                                         data-movie-id="<?= $result['id'] ?>"
                                                                         value="<?= $result['id'] ?>"><?= $output ?></button>
                                                                 <?php else: ?>
-                                                                    <button class="watchlist-btn btn btn-warning btn-sm"
+                                                                    <button class="watchlist-btn btn btn-warning btn-sm mt-1"
                                                                         data-movie-id="<?= $result['id'] ?>"
                                                                         value="<?= $result['id'] ?>">Add to Watchlist</button>
                                                                 <?php endif; ?>

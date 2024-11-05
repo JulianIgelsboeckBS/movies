@@ -15,15 +15,17 @@
                     <li class="menu-item current-menu-item"><a href="index.php">Home</a></li>                    
                     <li class="menu-item"><a href="watchlist.php">Watchlist</a></li>
                     <li class="menu-item"><a href="formSearch.php">Filmsuche</a></li>
-                    <li class="menu-item"><a href="movie_details.php">Filmdetails</a></li>
+                    <li class="menu-item"><a href="movie_details.php?id=1">Filmdetails</a></li>
                     <li class="menu-item"><a href="logout.php">Logout</a></li>
                 </ul> <!-- .menu -->
 
-                <form action="#" class="search-form">
-                    <input type="text" placeholder="Search..." id="searchfield" >
-                    <button><i class="fa fa-search"></i></button>
+                
+                <div class="search-form">
+                    <input type="text" placeholder="Search..." id="searchfield"  >
+                    <button><i class="fa fa-search" id="searchForm" name="searchfield" ></i></button>
                     <!-- <button class="btn" id="disableFilter">Filter ausblenden</button> -->
-                </form>
+                 </div>
+                
             </div> <!-- .main-navigation -->
 
             <div class="mobile-navigation"></div>

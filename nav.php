@@ -15,8 +15,7 @@
                     <li class="menu-item"><a href="index.php">Home</a></li>                    
                     <li class="menu-item"><a href="about.php">About</a></li>
                     <li class="menu-item"><a href="formSearch.php">Filmsuche</a></li>
-                    <li class="menu-item"><a href="movie_details.php?id=1">Filmdetails</a></li>
-                    
+                    <li class="menu-item"><a href="movie_details.php?id=1">Filmdetails</a></li>                    
                     <li class="menu-item"><a href="login.php">Login</a></li>
                 </ul> <!-- .menu -->
 
